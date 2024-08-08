@@ -23,6 +23,8 @@ public class Tabuleiro {
 
     public void getBoard() {
 
+        System.out.println("");
+        System.out.println("-=-=-=-=-=-=-=-=-=-");
         if (this.tabuleiro[1][1] != null) {
             for (int i = 0; i < 5; i++) {
                 for (int j = 0; j < 5; j++) {
@@ -33,6 +35,8 @@ public class Tabuleiro {
         } else {
             System.out.println("O tabuleiro está vazio!");
         }
+        System.out.println("-=-=-=-=-=-=-=-=-=-");
+        System.out.println(" ");
     }
 
     public Boolean shot(Player j, int x, int y) {

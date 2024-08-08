@@ -1,6 +1,7 @@
 public class Player {
-    private String name;
+    private String name = "IA";
     private String symbol;
+    private boolean ia = false;
     
     public String getName() {
         return name;
@@ -9,24 +10,26 @@ public class Player {
     public String getSymbol() {
         return symbol;
     }
+    public boolean getIA(){
+        return ia;
+    }
 
     public void setName(String name) {
-        String n = name.toUpperCase();
-        if (n.equals("IA")) {
-            System.out.println(n);
-            this.name = n;
+        if (name.equals("null")) {
+            this.name = "IA";
+        }else{
+            this.name = name;
         }
-        this.name = name;
     }
 
     public void setSymbol(String symbol) {
         this.symbol = symbol;
     }
 
-    public int getRandomNum(){
-        int num = ((int)Math.random())*3;
-        return  num;
+    public void setIA(boolean ia){
+        this.ia = ia;
     }
+
 
     public String toString() {
         return "Nome: "+this.name+"\nSimbolo: "+this.symbol+"\n";
