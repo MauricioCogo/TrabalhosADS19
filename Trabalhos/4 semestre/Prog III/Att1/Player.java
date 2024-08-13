@@ -23,13 +23,14 @@ public class Player {
     }
 
     public void setSymbol(String symbol) {
-        this.symbol = symbol;
+        symbol = symbol.toUpperCase();
+        char s = symbol.charAt(0);
+        this.symbol = Character.toString(s);
     }
 
     public void setIA(boolean ia){
         this.ia = ia;
     }
-
 
     public String toString() {
         return "Nome: "+this.name+"\nSimbolo: "+this.symbol+"\n";

@@ -1,6 +1,7 @@
 public class Tabuleiro {
 
     private String[][] tabuleiro = new String[5][5];
+    private int count = 0;
 
     public void create() {
         for (int i = 0; i < 5; i++) {
@@ -21,6 +22,10 @@ public class Tabuleiro {
         }
     }
 
+    public void setTabuleiro(String[][] tabuleiro) {
+        this.tabuleiro = tabuleiro;
+    }
+
     public void getBoard() {
 
         System.out.println("");
@@ -39,11 +44,27 @@ public class Tabuleiro {
         System.out.println(" ");
     }
 
-    public Boolean shot(Player j, int x, int y) {
-        if (tabuleiro[x][y].equals(" ")) {
-            tabuleiro[x][y] = j.getSymbol();
+    public String[][] getCopy(){
+        String[][] copy = new String[5][5];
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                copy[i][j] = tabuleiro[i][j];
+            }
+        }
+        return copy;
+    }
+
+    public Boolean shot(Player p, int x, int y) {
+        if (tabuleiro[x][y].equals(" ") ) {
+            tabuleiro[x][y] = p.getSymbol();
+            count++;
             return true;
         } else {
+            if (p.getIA()==false) {
+                System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                System.out.println("    Jogada invalida!");
+                System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=");
+            }
             return false;
         }
     }
@@ -88,6 +109,13 @@ public class Tabuleiro {
         }
         if ((tabuleiro[0][4].equals(j1.getSymbol())) && (tabuleiro[2][2].equals(j1.getSymbol()))
                 && (tabuleiro[4][0].equals(j1.getSymbol()))) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean draw(){
+        if (count==9) {
             return true;
         }
         return false;
