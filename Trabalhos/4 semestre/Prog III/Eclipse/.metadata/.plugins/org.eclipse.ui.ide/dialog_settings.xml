@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<list key="installedFeatures">
+		<item value="org.eclipse.dltk.core.index.lucene:6.2.0.202005020530"/>
+		<item value="org.eclipse.dltk.core:6.2.0.202005020530"/>
+		<item value="org.eclipse.dltk.mylyn:6.2.0.202005020530"/>
+		<item value="org.eclipse.emf.common:2.24.0.v20210924-1718"/>
+		<item value="org.eclipse.emf.ecore:2.26.0.v20210924-1718"/>
+		<item value="org.eclipse.fx.ide.css.feature:3.7.1.202110090700"/>
+		<item value="org.eclipse.help:2.3.800.v20211124-1800"/>
+		<item value="org.eclipse.jdt:3.18.1000.v20211124-1800"/>
+		<item value="org.eclipse.mylyn.bugzilla_feature:3.25.2.v20200814-0512"/>
+		<item value="org.eclipse.mylyn.commons.identity:1.17.2.v20200813-0821"/>
+		<item value="org.eclipse.mylyn.commons.notifications:1.17.2.v20200813-0821"/>
+		<item value="org.eclipse.mylyn.commons.repositories:1.17.2.v20200813-0821"/>
+		<item value="org.eclipse.mylyn.commons:3.25.2.v20200813-0821"/>
+		<item value="org.eclipse.mylyn.context_feature:3.25.2.v20200828-1617"/>
+		<item value="org.eclipse.mylyn.discovery:3.25.2.v20200813-0821"/>
+		<item value="org.eclipse.mylyn.ide_feature:3.25.2.v20200828-1617"/>
+		<item value="org.eclipse.mylyn.monitor:3.25.2.v20200813-0821"/>
+		<item value="org.eclipse.mylyn.tasks.ide:3.25.2.v20200814-0512"/>
+		<item value="org.eclipse.mylyn.team_feature:3.25.2.v20200828-1617"/>
+		<item value="org.eclipse.mylyn.wikitext.editors_feature:3.0.42.202201072301"/>
+		<item value="org.eclipse.mylyn.wikitext_feature:3.0.42.202201072301"/>
+		<item value="org.eclipse.mylyn_feature:3.25.2.v20200814-0512"/>
+		<item value="org.eclipse.pde:3.14.900.v20210906-0500"/>
+		<item value="org.eclipse.php.mylyn:7.2.1.202112011741"/>
+		<item value="org.eclipse.php.profiler:7.2.1.202112011741"/>
+		<item value="org.eclipse.php:7.2.1.202112011741"/>
+		<item value="org.eclipse.platform:4.22.0.v20211124-1800"/>
+		<item value="org.eclipse.rcp:4.22.0.v20211124-1800"/>
+		<item value="org.eclipse.wb.core.feature:1.9.7.202106041225"/>
+		<item value="org.eclipse.wb.core.ui.feature:1.9.7.202106041225"/>
+		<item value="org.eclipse.wb.core.xml.feature:1.9.7.202106041225"/>
+		<item value="org.eclipse.wb.doc.user.feature:1.9.7.202106041225"/>
+		<item value="org.eclipse.wb.layout.group.feature:1.9.7.202106041225"/>
+		<item value="org.eclipse.wb.rcp.SWT_AWT_support:1.9.7.202106041225"/>
+		<item value="org.eclipse.wb.rcp.doc.user.feature:1.9.7.202106041225"/>
+		<item value="org.eclipse.wb.rcp.feature:1.9.7.202106041225"/>
+		<item value="org.eclipse.wb.swing.doc.user.feature:1.9.7.202106041225"/>
+		<item value="org.eclipse.wb.swing.feature:1.9.7.202106041225"/>
+		<item value="org.eclipse.wb.swt.feature:1.9.7.202106041225"/>
+		<item value="org.eclipse.wb.xwt.feature:1.9.7.202106041225"/>
+		<item value="org.eclipse.wst.xml_ui.feature:3.24.0.v202111190506"/>
+		<item value="org.eclipse.xtend.sdk:2.25.0.v20210301-1429"/>
+		<item value="org.eclipse.xtext.sdk:2.25.0.v20210301-1429"/>
+		<item value="org.eclipse.xtext.ui:2.25.0.v20210301-1429"/>
+		<item value="org.eclipse.xtext.xbase.lib:2.25.0.v20210301-0822"/>
+		<item value="org.eclipse.xtext.xbase:2.25.0.v20210301-1429"/>
+		<item value="org.eclipse.xtext.xtext.ui.graph:2.25.0.v20210301-1429"/>
+		<item value="org.eclipse.xtext.xtext.ui:2.25.0.v20210301-1429"/>
+	</list>
+	<section name="NewWizardAction">
+		<item key="NewWizardSelectionPage.STORE_SELECTED_ID" value="org.eclipse.jdt.ui.wizards.JavaProjectWizard"/>
+		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
+			<item value="org.eclipse.jdt.ui.java"/>
+		</list>
+	</section>
+</section>

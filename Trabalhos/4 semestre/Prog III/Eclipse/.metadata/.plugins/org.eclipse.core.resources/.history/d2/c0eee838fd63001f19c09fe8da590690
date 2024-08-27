@@ -1,0 +1,108 @@
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.GridLayout;
+import javax.swing.JLabel;
+import net.miginfocom.swing.MigLayout;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+
+public class Aula26_08 extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField edit_modelo;
+	private JTextField edit_cor;
+	private JTextField edit_ano;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Aula26_08 frame = new Aula26_08();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Aula26_08() {
+		setTitle("Caarros");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(new MigLayout("", "[][::100px,center][][grow][][][]", "[][][][][][][][][][][]"));
+		
+		JLabel dados = new JLabel("Dados do meu MeuCarro");
+		
+		contentPane.add(dados, "cell 3 1,alignx center,aligny baseline");
+		
+		JLabel modelo = new JLabel("Modelo: ");
+		contentPane.add(modelo, "cell 2 2,alignx left");
+		
+		edit_modelo = new JTextField();
+		contentPane.add(edit_modelo, "cell 3 2,growx");
+		edit_modelo.setColumns(10);
+		
+		
+		JLabel cor = new JLabel("Cor: ");
+		contentPane.add(cor, "cell 2 3,alignx left");
+		
+		edit_cor = new JTextField();
+		contentPane.add(edit_cor, "cell 3 3,growx");
+		edit_cor.setColumns(10);
+		
+		JLabel ano = new JLabel("Ano: ");
+		contentPane.add(ano, "cell 2 4,alignx left");
+		
+		edit_ano = new JTextField();
+		contentPane.add(edit_ano, "cell 3 4,growx");
+		edit_ano.setColumns(10);
+		
+		JButton btnNewButton = new JButton("Registrar");
+		contentPane.add(btnNewButton, "cell 3 5,growx");
+		
+		JLabel lblConsultarMeuCarro = new JLabel("Consultar meu carro");
+		contentPane.add(lblConsultarMeuCarro, "cell 3 6");
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		contentPane.add(textField, "cell 3 7,growx");
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		contentPane.add(textField_1, "cell 3 8,growx");
+		
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		contentPane.add(textField_2, "cell 3 9,growx");
+		
+		JButton btnConsultar = new JButton("Consultar");
+		contentPane.add(btnConsultar, "cell 3 10,growx");
+		
+	}
+	
+	public void cadastrar(String modelo, String cor, int ano) {
+		Veiculo v = new Veiculo();
+		v.setModelo(edit_modelo.getText());
+		v.setCor(edit_cor.getText());
+		v.setAno(Integer.parseInt(edit_ano.getText()));
+		
+	}
+
+}
