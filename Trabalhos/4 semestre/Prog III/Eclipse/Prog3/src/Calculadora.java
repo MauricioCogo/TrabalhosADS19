@@ -1,3 +1,4 @@
+import java.util.Iterator;
 
 public class Calculadora {
 
@@ -36,6 +37,13 @@ public class Calculadora {
 	}
 	public int divisao() {
 		return num1/num2;
+	}
+	public int potencia() {
+	    int count = 1;
+	    for (int i = 0; i < num2; i++) {
+	        count *= num1;
+	    }
+	    return count;
 	}
 	
 }

@@ -3,4 +3,8 @@
 	<moveEntry
 		id="system.chooseComponent"
 		category="org.eclipse.wb.swing.containers"/>
+	<moveEntry
+		id="org.eclipse.wb.swing.components javax.swing.JButton"
+		category="org.eclipse.wb.swing.components"
+		nextEntry="org.eclipse.wb.swing.components javax.swing.JTextField"/>
 </commands>
