@@ -2,7 +2,6 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import net.miginfocom.swing.MigLayout;
@@ -54,7 +53,6 @@ public class Aula26_08_02 extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new MigLayout("", "[][][][grow][][grow]", "[][][][][][][][]"));
-		setLocationRelativeTo(null);
 
 		txt_result = new JTextField();
 		contentPane.add(txt_result, "cell 3 1,growx");
@@ -167,17 +165,17 @@ public class Aula26_08_02 extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (txt_result.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Não foi possivel calcular pois não possui numeros!");
+					System.out.println("Vazio");
 				} else {
 					String[] op = new String[2];
 
 					if (c.getOperacao() == null) {
-						JOptionPane.showMessageDialog(null, "Não é possivel calcular pois não tem operador!");
+						System.out.println("O operador ta vazio");
 					} else {
 						op = txt_result.getText().split(Pattern.quote(c.getOperacao()));
 
 						if (op.length == 1) {
-							JOptionPane.showMessageDialog(null, "Não é possivel calcular pois não tem o segundo numero!!");
+							System.out.println("segundo numero vazio");
 						} else {
 							if ((txt_result.getText().matches("[0-9]+\\Q" + c.getOperacao() + "\\E[0-9]+"))) {
 
@@ -202,7 +200,7 @@ public class Aula26_08_02 extends JFrame {
 									break;
 								}
 							}else {
-								JOptionPane.showMessageDialog(null, "Não é possivel calcular pois contem letras na sentença!");
+								System.out.println("Não pode ter letras!");
 							}
 						}
 					}
@@ -220,7 +218,7 @@ public class Aula26_08_02 extends JFrame {
 						txt_result.setText(txt_result.getText() + "+");
 						c.setOperacao("+");
 					} else {
-						JOptionPane.showMessageDialog(null, "Não é possivel calcular pois ja possui outro operador!");
+						System.out.println("n pode mais colocar +");
 					}
 				} else {
 					txt_result.setText(txt_result.getText() + "+");
@@ -240,7 +238,7 @@ public class Aula26_08_02 extends JFrame {
 						txt_result.setText(txt_result.getText() + "-");
 						c.setOperacao("-");
 					} else {
-						JOptionPane.showMessageDialog(null, "Não é possivel calcular pois ja possui outro operador!");
+						System.out.println("n pode mais colocar -");
 					}
 				} else {
 					txt_result.setText(txt_result.getText() + "-");
@@ -260,7 +258,7 @@ public class Aula26_08_02 extends JFrame {
 						txt_result.setText(txt_result.getText() + "*");
 						c.setOperacao("*");
 					} else {
-						JOptionPane.showMessageDialog(null, "Não é possivel calcular pois ja possui outro operador!");
+						System.out.println("n pode mais colocar *");
 					}
 				} else {
 					txt_result.setText(txt_result.getText() + "*");
@@ -280,7 +278,7 @@ public class Aula26_08_02 extends JFrame {
 						txt_result.setText(txt_result.getText() + "/");
 						c.setOperacao("/");
 					} else {
-						JOptionPane.showMessageDialog(null, "Não é possivel calcular pois ja possui outro operador!");
+						System.out.println("n pode mais colocar /");
 					}
 				} else {
 					txt_result.setText(txt_result.getText() + "/");
@@ -299,7 +297,7 @@ public class Aula26_08_02 extends JFrame {
 						txt_result.setText(txt_result.getText() + "^");
 						c.setOperacao("^");
 					} else {
-						JOptionPane.showMessageDialog(null, "Não é possivel calcular pois ja possui outro operador!");
+						System.out.println("n pode mais colocar ^");
 					}
 				} else {
 					txt_result.setText(txt_result.getText() + "^");
@@ -321,7 +319,7 @@ public class Aula26_08_02 extends JFrame {
 
 	public boolean verifica() {
 		if (txt_result.getText().contains("+") || txt_result.getText().contains("-")
-				|| txt_result.getText().contains("/") || txt_result.getText().contains("*") || txt_result.getText().contains("^")) {
+				|| txt_result.getText().contains("/") || txt_result.getText().contains("*")) {
 			return true;
 		}
 		return false;

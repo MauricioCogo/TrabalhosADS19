@@ -54,7 +54,6 @@ public class Aula26_08_02 extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new MigLayout("", "[][][][grow][][grow]", "[][][][][][][][]"));
-		setLocationRelativeTo(null);
 
 		txt_result = new JTextField();
 		contentPane.add(txt_result, "cell 3 1,growx");
@@ -321,7 +320,7 @@ public class Aula26_08_02 extends JFrame {
 
 	public boolean verifica() {
 		if (txt_result.getText().contains("+") || txt_result.getText().contains("-")
-				|| txt_result.getText().contains("/") || txt_result.getText().contains("*") || txt_result.getText().contains("^")) {
+				|| txt_result.getText().contains("/") || txt_result.getText().contains("*")) {
 			return true;
 		}
 		return false;

@@ -321,7 +321,7 @@ public class Aula26_08_02 extends JFrame {
 
 	public boolean verifica() {
 		if (txt_result.getText().contains("+") || txt_result.getText().contains("-")
-				|| txt_result.getText().contains("/") || txt_result.getText().contains("*") || txt_result.getText().contains("^")) {
+				|| txt_result.getText().contains("/") || txt_result.getText().contains("*")) {
 			return true;
 		}
 		return false;
