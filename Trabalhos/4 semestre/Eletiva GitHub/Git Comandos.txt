@@ -1,0 +1,42 @@
+git config Configura as informações do usuário, como nome e email.
+Exemplo git config --global user.name Seu Nome
+         git config --global user.email seuemail@email.com
+
+git clone Clona um repositório existente.
+Exemplo git clone httpsgithub.comusuariorepo.git
+
+git init Inicializa um novo repositório Git no diretório atual.
+Exemplo git init
+
+git status Verifica o estado atual do repositório, mostrando arquivos modificados e não rastreados.
+Exemplo git status
+
+git add arquivo Adiciona um arquivo específico à área de stage.
+Exemplo git add index.html
+
+git commit -m mensagem Grava as mudanças da área de stage no repositório com uma mensagem descritiva.
+Exemplo git commit -m Commit inicial
+
+git log Exibe o histórico de commits do repositório.
+Exemplo git log
+
+git diff Mostra as diferenças entre o diretório de trabalho e a área de stage[^1^][1].
+Exemplo git diff
+
+git rm arquivo Remove um arquivo do repositório e da área de stage.
+Exemplo git rm produtos.html
+
+git checkout Troca de branch ou restaura arquivos.
+Exemplo git checkout nova-branch
+
+git mv arquivo novo_nome Renomeia ou move um arquivo.
+Exemplo git mv estilos.css principal.css  
+
+git reset Remove arquivos da área de stage, preservando as mudanças.
+Exemplo git reset
+
+git revert commit Desfaz as mudanças de um commit específico.
+Exemplo git revert 7b750f3
+
+git remote add origin adiciona um repositório remoto
+git remote add origin httpslinkdorepositorio
