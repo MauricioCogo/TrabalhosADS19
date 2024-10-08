@@ -1,0 +1,86 @@
+package Agenda;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+public class Arquivo {
+	private BufferedReader br;
+	private BufferedWriter bw;
+	private String arquivo;
+
+	public Arquivo(String arquivo) {
+		this.arquivo = arquivo;
+		try {
+			br = new BufferedReader(new FileReader(this.arquivo + ".txt"));
+			br.close();
+		} catch (IOException e) {
+			try {
+				bw = new BufferedWriter(new FileWriter(this.arquivo + ".txt"));
+				bw.close();
+			} catch (IOException e1) {
+			}
+		}
+	}
+
+	public void gravar(Contato contato) {
+		try {
+			bw = new BufferedWriter(new FileWriter(this.arquivo + ".txt", true));
+
+			bw.write(contato.getNome() + "," + contato.getApelido() + "," + contato.getNumero() + ","
+					+ contato.getEmail());
+			bw.write("\n");
+
+			bw.close();
+		} catch (Exception e) {
+			System.out.println("Erro na abertura de arquivo para gravação.");
+		}
+	}
+
+	public LinkedList<Contato> ler() {
+		String nome = "";
+		String[] conteudo;
+
+		LinkedList<Contato> co = new LinkedList<>();
+		try {
+			br = new BufferedReader(new FileReader(this.arquivo + ".txt"));
+			while ((nome = br.readLine()) != null) {
+
+				conteudo = nome.split(",");
+
+				Contato c = new Contato(conteudo[0], conteudo[1], conteudo[2], conteudo[3]);
+				co.add(c);
+			}
+			br.close();
+		} catch (Exception e) {
+			System.out.println("Erro na abertura de arquivo para leitura.");
+		}
+		return co;
+	}
+
+	public LinkedList<Contato> deletar(String texto) {
+		String nome = "";
+		String[] conteudo;
+
+		LinkedList<Contato> co = new LinkedList<>();
+		try {
+			br = new BufferedReader(new FileReader(this.arquivo + ".txt"));
+			while ((nome = br.readLine()) != null)
+				if (!nome.equals(texto)) {
+					conteudo = nome.split(",");
+					Contato c = new Contato(conteudo[0], conteudo[1], conteudo[2], conteudo[3]);
+					co.add(c);
+				}
+
+			br.close();
+		} catch (Exception e) {
+			System.out.println("Erro na abertura de arquivo para leitura.");
+		}
+		return co;
+	}
+}

@@ -42,5 +42,8 @@ public class Contato {
 		return numero;
 	}
 	
+	public String[] toLinha() {
+		return new String[] {this.nome, this.apelido,this.numero,this.email};
+	}
 
 }

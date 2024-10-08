@@ -1,0 +1,78 @@
+package Agenda;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.util.LinkedList;
+import net.miginfocom.swing.MigLayout;
+
+public class TelaAlteracaoRemocao extends JFrame {
+
+	private JTable table;
+	private DefaultTableModel model;
+	private LinkedList<Contato> contatos;
+
+	public TelaAlteracaoRemocao() {
+		setTitle("Alteração/Remoção de Contatos");
+		setSize(400, 300);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setLocationRelativeTo(null);
+
+		contatos = carregarContatos();
+
+		model = new DefaultTableModel(new Object[] { "Nome","Apelido", "Email", "Telefone" }, 0);
+		table = new JTable(model);
+
+		for (Contato contato : contatos) {
+			model.addRow(new Object[] { contato.getNome(),contato.getApelido(), contato.getEmail(), contato.getNumero() });
+		}
+
+		table.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mouseClicked(java.awt.event.MouseEvent evt) {
+				int selectedRow = table.getSelectedRow();
+				if (selectedRow != -1) {
+					mostrarDetalhes(selectedRow);
+				}
+			}
+		});
+		getContentPane().setLayout(new MigLayout("", "[452px]", "[426px][]"));
+		getContentPane().add(new JScrollPane(table), "cell 0 0,alignx left,aligny top");
+
+		JButton removerButton = new JButton("Remover");
+		getContentPane().add(removerButton, "cell 0 1,alignx right");
+		removerButton.addActionListener(e -> removerContato());
+
+		setVisible(true);
+	}
+
+    private LinkedList<Contato> carregarContatos() {
+        Arquivo a = new Arquivo("agenda");
+        return a.ler();
+    }
+
+	private void mostrarDetalhes(int index) {
+		Contato contato = contatos.get(index);
+		String detalhes = String.format("Nome: %s\nEmail: %s\nTelefone: %s", contato.getNome(), contato.getEmail(),
+				contato.getNumero());
+		JOptionPane.showMessageDialog(this, detalhes, "Detalhes do Contato", JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	private void removerContato() {
+		int selectedRow = table.getSelectedRow();
+		if (selectedRow != -1) {
+			contatos.remove(selectedRow);
+			model.removeRow(selectedRow);
+			JOptionPane.showMessageDialog(this, "Contato removido com sucesso.");
+		} else {
+			JOptionPane.showMessageDialog(this, "Selecione um contato para remover.");
+		}
+	}
+
+	private void gravarContatos() {
+	    Arquivo a = new Arquivo("agenda");
+	    a.apagarConteudo(); // Apaga o conte�do do arquivo
+	    for (Contato contato : contatos) {
+	        a.gravar(contato); // Grava os contatos atualizados
+	    }
+	}
+}

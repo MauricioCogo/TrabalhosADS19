@@ -1,4 +1,5 @@
 git config Configura as informações do usuário, como nome e email.
+
 Exemplo git config --global user.name Seu Nome
          git config --global user.email seuemail@email.com
 
@@ -40,3 +41,5 @@ Exemplo git revert 7b750f3
 
 git remote add origin adiciona um repositório remoto
 git remote add origin httpslinkdorepositorio
+
+git remote -v 

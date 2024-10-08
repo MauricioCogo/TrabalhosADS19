@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".telamovimentos">
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="425dp"
+        android:layout_height="101dp"
+        app:srcCompat="@drawable/icon_bank" />
+
+
+    <Button
+        android:id="@+id/btsaque"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#673AB7"
+        android:drawableLeft="@drawable/icon_history"
+        android:text="Saque"
+        tools:layout_editor_absoluteX="202dp"
+        tools:layout_editor_absoluteY="53dp" />
+
+    <Button
+        android:id="@+id/btdeposito"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#673AB7"
+        android:drawableLeft="@drawable/icon_money_transfer"
+        android:text="Depósito"
+        tools:layout_editor_absoluteX="202dp"
+        tools:layout_editor_absoluteY="53dp" />
+
+    <Button
+        android:id="@+id/bttransfer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#673AB7"
+        android:drawableLeft="@drawable/icon_money_transfer"
+        android:text="Transferência"
+        tools:layout_editor_absoluteX="202dp"
+        tools:layout_editor_absoluteY="53dp" />
+    <Button
+        android:id="@+id/btpagamento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#673AB7"
+        android:drawableLeft="@drawable/icon_money_transfer"
+        android:text="Pagamento"
+        tools:layout_editor_absoluteX="202dp"
+        tools:layout_editor_absoluteY="53dp" />
+    <Button
+        android:id="@+id/btmovretorna"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#673AB7"
+        android:drawableLeft="@drawable/icon_logout"
+        android:text="Retornar"
+        tools:layout_editor_absoluteX="202dp"
+        tools:layout_editor_absoluteY="53dp" />
+</LinearLayout>

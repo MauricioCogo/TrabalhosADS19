@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".telaprincipal">
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="496dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="241dp"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/icon_bank" />
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="34dp"
+                        android:text="Correntista"
+                        android:textSize="24sp" />
+
+                    <TextView
+                        android:id="@+id/txtcorrentista"
+                        android:layout_width="match_parent"
+                        android:layout_height="34dp"
+                        android:text="Fulano de tal"
+                        android:textSize="24sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textView4"
+                            android:layout_width="93dp"
+                            android:layout_height="34dp"
+                            android:text="Saldo"
+                            android:textSize="24sp" />
+
+                        <TextView
+                            android:id="@+id/txtsaldo"
+                            android:layout_width="207dp"
+                            android:layout_height="34dp"
+                            android:text="R$ 99,99"
+                            android:textSize="24sp" />
+
+
+                    </LinearLayout>
+                </LinearLayout>
+            </FrameLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btextrato"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#673AB7"
+            android:drawableLeft="@drawable/icon_history"
+            android:text="Extrato"
+            tools:layout_editor_absoluteX="202dp"
+            tools:layout_editor_absoluteY="53dp" />
+
+
+        <Button
+            android:id="@+id/btmovimentos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#673AB7"
+            android:drawableLeft="@drawable/icon_money_transfer"
+            android:text="Movimentações"
+            tools:layout_editor_absoluteX="202dp"
+            tools:layout_editor_absoluteY="53dp" />
+
+        <Button
+            android:id="@+id/btencerra"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#673AB7"
+            android:drawableLeft="@drawable/icon_logout"
+            android:text="Sair"
+            tools:layout_editor_absoluteX="202dp"
+            tools:layout_editor_absoluteY="53dp" />
+
+    </LinearLayout>
+</LinearLayout>

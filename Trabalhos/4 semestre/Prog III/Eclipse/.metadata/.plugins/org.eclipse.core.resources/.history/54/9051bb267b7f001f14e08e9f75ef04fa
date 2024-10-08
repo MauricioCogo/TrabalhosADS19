@@ -1,0 +1,48 @@
+package Agenda;
+
+import javax.swing.*;
+import java.awt.event.*;
+import net.miginfocom.swing.MigLayout;
+
+public class MenuPrincipal extends JFrame {
+
+	private JMenuBar menuBar;
+	private JMenu menu;
+	private JMenuItem cadastro, consulta, alteracaoRemocao;
+
+	public MenuPrincipal() {
+		initComponents();
+	}
+
+	private void initComponents() {
+		setTitle("Agenda de Contatos");
+		setSize(400, 300);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLocationRelativeTo(null);
+
+		menuBar = new JMenuBar();
+		menu = new JMenu("Opções");
+
+		cadastro = new JMenuItem("Cadastro");
+		consulta = new JMenuItem("Consulta");
+		alteracaoRemocao = new JMenuItem("Alteração ou Remoção");
+
+		menu.add(cadastro);
+		menu.add(consulta);
+		menu.add(alteracaoRemocao);
+		menuBar.add(menu);
+
+		setJMenuBar(menuBar);
+
+		cadastro.addActionListener(e -> new TelaCadastro().setVisible(true));
+		consulta.addActionListener(e -> new TelaConsulta().setVisible(true));
+		alteracaoRemocao.addActionListener(e -> new TelaAlteracaoRemocao().setVisible(true));
+
+		setVisible(true);
+		getContentPane().setLayout(new MigLayout("", "[]", "[]"));
+	}
+
+	public static void main(String[] args) {
+		new MenuPrincipal();
+	}
+}

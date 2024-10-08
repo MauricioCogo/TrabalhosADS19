@@ -1,0 +1,14 @@
+package Agenda;
+
+import javax.swing.JPanel;
+
+public class Cadastro extends JPanel {
+
+	/**
+	 * Create the panel.
+	 */
+	public Cadastro() {
+
+	}
+
+}

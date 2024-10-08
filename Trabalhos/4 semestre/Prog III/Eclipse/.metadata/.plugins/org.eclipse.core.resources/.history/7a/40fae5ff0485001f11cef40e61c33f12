@@ -1,0 +1,14 @@
+package JogodaVelha;
+
+import javax.swing.JPanel;
+
+public class TelaJogo extends JPanel {
+
+	/**
+	 * Create the panel.
+	 */
+	public TelaJogo() {
+
+	}
+
+}

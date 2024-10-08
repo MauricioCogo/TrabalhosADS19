@@ -1,0 +1,113 @@
+package Agenda;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class Menu extends JFrame {
+
+	private JPanel contentPane;
+	public static Menu frame;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					frame = new Menu();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Menu() {
+		this.setContentPane(new Inicio());
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		JMenu mnContatos = new JMenu("Contatos");
+		menuBar.add(mnContatos);
+		
+		JMenuItem item_cadastrar = new JMenuItem("Cadastrar");
+		item_cadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				abrirTelaConsulta();
+			}
+		});
+		mnContatos.add(item_cadastrar);
+		
+		JMenuItem item_consultar = new JMenuItem("Consultar");
+		item_consultar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				abrirTelaConsulta();
+			}
+		});
+		mnContatos.add(item_consultar);
+		
+		JMenuItem item_edt_rmv = new JMenuItem("Editar ou remover");
+		item_edt_rmv.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				abrirTelaEdtRmv();
+			}
+		});
+		mnContatos.add(item_edt_rmv);
+		
+		JMenu mnSobre = new JMenu("Sobre");
+		menuBar.add(mnSobre);
+		
+		JMenuItem item_desenvolvedor = new JMenuItem("Desenvolvedor");
+		item_desenvolvedor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(frame, "Desenvolvedor: Mauricio Carvalho Cogo\nTurma: ADS 19\nInstituto Federal Farroupilha - Campus São Vicente do Sul");;
+			}
+		});
+		mnSobre.add(item_desenvolvedor);
+		
+		JMenuItem item_software = new JMenuItem("Programa");
+		item_software.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(frame, "Agenda do MauricioCogo\nVersão: 1.1");
+			}
+		});
+		mnSobre.add(item_software);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
+	}
+	
+	public void abrirTelaCadastro() {
+		this.setContentPane(new Cadastro());
+		this.setVisible(true);
+	}
+	public void abrirTelaConsulta() {
+		this.setContentPane(new Consulta());
+		this.setVisible(true);
+	}
+	public void abrirTelaEdtRmv() {
+		this.setContentPane(new AlteracaoRemocao());
+		this.setVisible(true);
+	}
+
+}
