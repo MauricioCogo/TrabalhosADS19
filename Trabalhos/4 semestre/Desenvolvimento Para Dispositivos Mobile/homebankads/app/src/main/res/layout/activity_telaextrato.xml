@@ -41,9 +41,16 @@
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="11dp" />
 
-    <ListView
+    <Button
+        android:id="@+id/btBuscar"
         android:layout_width="match_parent"
-        android:layout_height="442dp" />
+        android:layout_height="wrap_content"
+        android:text="Buscar" />
+
+    <ListView
+        android:id="@+id/listViewMovimentos"
+        android:layout_width="match_parent"
+        android:layout_height="376dp" />
 
     <Button
         android:id="@+id/btextratret"

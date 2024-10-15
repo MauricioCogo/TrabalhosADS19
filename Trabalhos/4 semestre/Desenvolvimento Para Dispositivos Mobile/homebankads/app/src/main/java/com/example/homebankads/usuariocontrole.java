@@ -1,9 +1,12 @@
 package com.example.homebankads;
-import java.util.ArrayList;
-import java.util.List;
+
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class usuariocontrole {
 
@@ -11,24 +14,33 @@ public class usuariocontrole {
     private conectadb banco;
 
     public usuariocontrole(Context contexto) {
+
         this.banco = new conectadb(contexto);
     }
+    public boolean insereUsuario(usuario usr) {
 
-    public void insere_usuario(usuario usr){
-        String INSERE_USUARIO = "INSERT INTO usuario (login,senha) values ('"+usr.getLogin()+"','"+usr.getSenha()+"')";
-        try{
-            SQLiteDatabase db=banco.getWritableDatabase();
-            db.execSQL(INSERE_USUARIO);
-            db.close();
-        }catch(Exception ex){
-            //("Erro (criação tabela)",ex.getMessage());
+        if(usr.getLogin().isBlank() || usr.getSenha().isBlank()){
+            return false;
         }
 
+        String tabela = "usuario";
+        ContentValues valores = new ContentValues();
+        valores.put("login", usr.getLogin());
+        valores.put("senha", usr.getSenha());
+        valores.put("saldo", usr.getSaldo());
 
+        try (SQLiteDatabase db = banco.getWritableDatabase()) {
+            long resultado = db.insert(tabela, null, valores);
+            return resultado != -1; // Retorna true se a inserção foi bem-sucedida
+        } catch (Exception ex) {
+            ex.printStackTrace(); // Log para fins de depuração
+            return false;
+        }
     }
 
+
     public void apaga_usuario(usuario usr){
-        String APAGA_USUARIO = "DELETE FROM usuario WHERE id_usr ="+usr.getId();
+        String APAGA_USUARIO = "DELETE FROM usuario WHERE id ="+usr.getId();
         try{
             SQLiteDatabase db=banco.getWritableDatabase();
             db.execSQL(APAGA_USUARIO);
@@ -38,7 +50,8 @@ public class usuariocontrole {
         }
     }
     public void atualiza_usuario(usuario usr){
-        String ATUALIZA_USUARIO = "UPDATE TABLE usuario SET login = "+usr.getLogin()+", senha ="+usr.getSenha()+" WHERE id_usr = "+usr.getId();
+        String ATUALIZA_USUARIO = "UPDATE TABLE usuario SET login = "+usr.getLogin()+", senha ="+usr.getSenha()+
+                ",saldo="+usr.getSaldo()+" WHERE id = "+usr.getId();
         try{
             SQLiteDatabase db=banco.getWritableDatabase();
             db.execSQL(ATUALIZA_USUARIO);
@@ -47,9 +60,36 @@ public class usuariocontrole {
             //("Erro (criação tabela)",ex.getMessage());
         }
     }
+
+    public usuario retornaDadosUsuario(String login) {
+        usuario usr = null;
+        if (login.isBlank()){
+            return usr;
+        }
+        String CONSULTA_USUARIO = "SELECT * FROM usuario WHERE login = ?";
+
+        try (SQLiteDatabase bd = banco.getReadableDatabase();
+             Cursor c = bd.rawQuery(CONSULTA_USUARIO, new String[]{login})) {
+
+            if (c.moveToFirst()) {
+                usr = new usuario();
+                usr.setId(c.getInt(c.getColumnIndexOrThrow("id")));
+                usr.setLogin(c.getString(c.getColumnIndexOrThrow("login")));
+                usr.setSenha(c.getString(c.getColumnIndexOrThrow("senha")));
+                usr.setSaldo(c.getDouble(c.getColumnIndexOrThrow("saldo")));
+            }
+
+        } catch (Exception ex) {
+            // Aqui você pode logar o erro para fins de depuração
+            ex.printStackTrace();
+        }
+
+        return usr;
+    }
+
     public List<usuario> Consulta_todos_usuarios() {
         List<usuario> listaDeUsuarios = new ArrayList<usuario>();
-        String CONSULTA_USUARIO ="SELECT usuario_id,usuario_nome,usuario_email,usuario_senha FROM usuario ORDER BY usuario_nome";
+        String CONSULTA_USUARIO ="SELECT id,login,senha,saldo FROM usuario ORDER BY login";
         try{
             SQLiteDatabase bd=banco.getReadableDatabase();
             Cursor c=bd.rawQuery(CONSULTA_USUARIO,null);
@@ -59,6 +99,7 @@ public class usuariocontrole {
                     usr.setId(Integer.parseInt(c.getString(0)));
                     usr.setLogin(c.getString(1));
                     usr.setSenha(c.getString(2));
+                    usr.setSaldo(c.getDouble(3));
                     listaDeUsuarios.add(usr);
                 } while (c.moveToNext());
             }
@@ -73,15 +114,18 @@ public class usuariocontrole {
     }
 
     public boolean testaUsuario(String nome) {
-        String PESQUISA_POR_NOME="SELECT usuario_id FROM usuario WHERE usuario_nome ='"+nome+"'";
-        boolean ret=false;
+        if(!nome.isBlank()){
+            return false;
+        }
+        String PESQUISA_POR_NOME="SELECT id FROM usuario WHERE login ='"+nome+"'";
+        boolean ret = false;
         try{
             SQLiteDatabase bd=banco.getReadableDatabase();
             Cursor c=bd.rawQuery(PESQUISA_POR_NOME,null);
             int cursorCount = c.getCount();
             c.close();
             if (cursorCount > 0) {
-                ret =true;
+                ret = true;
             }
             banco.close();
         }catch(Exception ex){
@@ -93,21 +137,26 @@ public class usuariocontrole {
 
 
     public boolean checkusuario(String nome, String senha) {
-        String PESQUISA_POR_NOME_SENHA="SELECT usuario_id  FROM usuario WHERE usuario_nome ='"+nome+"' AND usuario_senha='"+senha+"'";
-        boolean ret=false;
-        try{
-            SQLiteDatabase bd=banco.getReadableDatabase();
-            Cursor c=bd.rawQuery(PESQUISA_POR_NOME_SENHA,null);
-            int cursorCount = c.getCount();
-            c.close();
-            if (cursorCount > 0) {
-                ret =true;
-            }
-            banco.close();
-        }catch(Exception ex){
-            //  ("Erro (criação tabela)",ex.getMessage());
-            ret=false;
+        // Verifica se o nome ou senha estão vazios
+        if (nome == null || nome.isBlank() || senha == null || senha.isBlank()) {
+            return false;
         }
-       return ret;
+
+        String pesquisaPorNomeSenha = "SELECT id FROM usuario WHERE login = ? AND senha = ?";
+        boolean ret = false;
+
+        try (SQLiteDatabase bd = banco.getReadableDatabase();
+             Cursor c = bd.rawQuery(pesquisaPorNomeSenha, new String[]{nome, senha})) {
+
+            // Verifica se o cursor tem resultados
+            ret = c.getCount() > 0;
+
+        } catch (Exception ex) {
+            ex.printStackTrace(); // Log para fins de depuração
+            ret = false;
+        }
+
+        return ret;
     }
+
 }
