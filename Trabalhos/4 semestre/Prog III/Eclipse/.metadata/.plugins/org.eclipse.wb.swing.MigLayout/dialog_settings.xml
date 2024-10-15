@@ -18,4 +18,10 @@
 		<item key="width" value="326"/>
 		<item key="height" value="486"/>
 	</section>
+	<section name="org.eclipse.wb.internal.swing.MigLayout.model.ui.RowsDialog">
+		<item key="x" value="697"/>
+		<item key="y" value="303"/>
+		<item key="width" value="525"/>
+		<item key="height" value="434"/>
+	</section>
 </section>

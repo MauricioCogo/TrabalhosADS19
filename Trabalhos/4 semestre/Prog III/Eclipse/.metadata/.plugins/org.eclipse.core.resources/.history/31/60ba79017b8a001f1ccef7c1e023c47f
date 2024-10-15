@@ -1,0 +1,204 @@
+package JogodaVelha;
+
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
+
+import net.miginfocom.swing.MigLayout;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.LinkedList;
+import java.util.Random;
+import java.util.Stack;
+
+public class TelaJogo extends JPanel {
+
+	private Player p1;
+	private Player p2;
+	private char vez;
+	private int x;
+	private int y;
+
+	// Componentes globais
+	private JLabel txt_vezde;
+	private LinkedList<JLabel> lista = new LinkedList();
+	private JButton btn_refazer;
+
+	public TelaJogo(Player p1, Player p2) {
+		
+		this.p1 = p1;
+		this.p2 = p2;
+		setLayout(new MigLayout("", "[grow][][][][grow]", "[grow][][][][][grow]"));
+
+		for (int i = 0; i < 9; i++) {
+			createBoardLabel(i);
+		}
+
+		btn_refazer = new JButton("Refazer");
+		add(btn_refazer, "cell 2 5");
+
+		System.out.println("AFGDJG");
+		main();
+	}
+
+	public void main() {
+        Tabuleiro tab = new Tabuleiro();
+        Random r = new Random();
+        Stack<String[][]> pilha = new Stack<>();
+        
+        System.out.println();
+        System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=");
+        System.out.println("    jogadores   ");
+        System.out.println(p1.getName() + " : " + p1.getSymbol());
+        System.out.println(p2.getName() + " : " + p2.getSymbol());
+        System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=");
+        System.out.println();
+
+        tab.create();
+        boolean ve = true;
+        while (ve) {
+            pilha.push(tab.getCopy());
+
+            tab.getBoard();
+
+            System.out.println("Jogada de " + p1.getName());
+            txt_ve.setText(p1.getName());
+            System.out.println("Coordenada X (1, 2 ou 3): ");
+            int x = e.nextInt();
+            System.out.println("Coordenada Y (1, 2 ou 3): ");
+            int y = e.nextInt();
+
+            if (tab.shot(p1, verifyPosition(y), verifyPosition(x))) {
+                tab.getBoard();
+
+                if (!tab.verify(p1)) {
+                    System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                    System.out.println("    " + p1.getName() + " ganhou!");
+                    System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                    break;
+                }
+
+                if (p2.getIA()) {
+                    boolean ia = true;
+                    System.out.println(" ");
+                    System.out.println("Jogada da IA");
+                    System.out.println(" ");
+                    Thread.sleep(2000);
+
+                    while (ia) {
+                        x = r.nextInt(3) + 1;
+                        y = r.nextInt(3) + 1;
+                        if (tab.shot(p2, verifyPosition(x), verifyPosition(x))) {
+                            System.out.println("");
+                            ia = false;
+                        } else {
+                            x = r.nextInt(3) + 1;
+                            y = r.nextInt(3) + 1;
+                        }
+                    }
+
+                    tab.getBoard();
+                    System.out.println("Deseja voltar uma jogada?");
+                    if (verifyString(e.next())) {
+                        tab.setTabuleiro(pilha.pop());
+                    }
+
+                } else {
+                    System.out.println("Jogada de " + p2.getName());
+                    System.out.println("X (1, 2 ou 3): ");
+                    int x2 = e.nextInt();
+                    System.out.println("Y: ");
+                    int y2 = e.nextInt();
+
+                    while (!tab.shot(p2, verifyPosition(y2), verifyPosition(x2))) {
+                        tab.getBoard();
+                        System.out.println("Jogada de " + p2.getName());
+                        System.out.println("X (1, 2 ou 3): ");
+                        x2 = e.nextInt();
+                        System.out.println("Y: ");
+                        y2 = e.nextInt();
+                    }
+                }
+
+                if (!tab.verify(p2)) {
+                    System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                    System.out.println("    " + p2.getName() + " ganhou!");
+                    System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                    break;
+                }
+
+            }
+            if (tab.draw()) {
+                System.out.println("Empate!");
+                break;
+            }
+        }
+    }
+
+	private JLabel createBoardLabel(int index) {
+        JLabel jLabel = new JLabel("", SwingConstants.CENTER);
+        jLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        jLabel.setOpaque(true);
+        jLabel.setBackground(Color.WHITE);
+        jLabel.setBorder(new LineBorder(Color.BLACK, 2));
+        jLabel.setFont(new Font("Arial", Font.BOLD, 32));
+        jLabel.setName((index / 3) + "," + (index % 3));
+
+        int row = index / 3;
+        int col = index % 3;
+
+        jLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                handleBoardClick(row, col, jLabel);
+            }
+        });
+
+        return jLabel;
+    }
+
+    private void handleBoardClick(int row, int col, JLabel jLabel) {
+    	
+    }
+	
+    public static boolean verifyString(String bool) {
+        bool = bool.toLowerCase();
+        switch (bool) {
+            case "sim":
+                return true;
+            case "s":
+                return true;
+            case "positivo":
+                return true;
+            case "sum":
+                return true;
+            case "som":
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    public static int verifyPosition(int num) {
+        if ((num >= 0) && (num <= 3)) {
+            switch (num) {
+                case 1:
+                    return 0;
+                case 2:
+                    return 2;
+                case 3:
+                    return 4;
+            }
+        } else {
+            System.out.println("Numero invalido!");
+        }
+        return 0;
+    }
+}

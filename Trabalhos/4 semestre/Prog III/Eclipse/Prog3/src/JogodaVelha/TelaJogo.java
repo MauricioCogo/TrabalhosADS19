@@ -1,107 +1,58 @@
 package JogodaVelha;
 
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-import java.util.LinkedList;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Random;
+import java.util.Scanner;
 import java.util.Stack;
 
 public class TelaJogo extends JPanel {
 
-	private Player p1;
-	private Player p2;
-	private char vez;
-	private int x;
-	private int y;
+    private Player p1;
+    private Player p2;
+    private Player currentP;
+    private Stack<String[][]> pilha = new Stack<>();
+    private Random r = new Random();
+    private Tabuleiro tab = new Tabuleiro();
+    
+    private JLabel txt_vez;
+    private JButton btn_refazer;
 
-	// Componentes globais
-	private JLabel txt_vezde;
-	private JLabel txt_ve;
-	private JLabel tab0x0;
-	private JLabel tab1x0;
-	private JLabel tab2x0;
-	private JLabel tab0x1;
-	private JLabel tab1x1;
-	private JLabel tab2x1;
-	private JLabel tab0x2;
-	private JLabel tab1x2;
-	private JLabel tab2x2;
-	private LinkedList<JLabel> lista = new LinkedList();
-	private JButton btn_refazer;
+    public TelaJogo(Player p1, Player p2) {
+        this.p1 = p1;
+        this.p2 = p2;
+        this.currentP = p1; // Inicializa currentP aqui
 
-	public TelaJogo(Player p1, Player p2) {
-		lista.add(tab0x0);
-		lista.add(tab1x0);
-		lista.add(tab2x0);
-		lista.add(tab0x1);
-		lista.add(tab1x1);
-		lista.add(tab2x1);
-		lista.add(tab0x2);
-		lista.add(tab1x2);
-		lista.add(tab2x2);
-		
-		this.p1 = p1;
-		this.p2 = p2;
-		setLayout(new MigLayout("", "[grow][][][][grow]", "[grow][][][][][grow]"));
+        setLayout(new MigLayout("wrap 3", "[grow][grow][grow]", "[]10[]"));
 
-		txt_vezde = new JLabel("Jogada de:");
-		add(txt_vezde, "cell 1 0,alignx right");
+        for (int i = 0; i < 9; i++) {
+            JLabel label = createBoardLabel(i);
+            add(label, "grow");
+        }
 
-		txt_ve = new JLabel("x ou o");
-		add(txt_ve, "cell 2 0,alignx left");
+        // Initialize txt_vez and btn_refazer
+        txt_vez = new JLabel("Current turn: ");
+        btn_refazer = new JButton("Refazer");
+        add(txt_vez, "span 3"); // Span across 3 columns
+        add(btn_refazer, "span 3"); // Span across 3 columns
 
-		tab0x0 = new JLabel("");
-		tab0x0.setIcon(new ImageIcon(TelaJogo.class.getResource("/JogodaVelha/X - Copia.png")));
-		add(tab0x0, "cell 1 1,alignx right");
+        main();
+    }
 
-		tab1x0 = new JLabel("");
-		tab1x0.setIcon(new ImageIcon(TelaJogo.class.getResource("/JogodaVelha/X - Copia.png")));
-		add(tab1x0, "cell 2 1,alignx center");
-
-		tab2x0 = new JLabel("");
-		tab2x0.setIcon(new ImageIcon(TelaJogo.class.getResource("/JogodaVelha/X - Copia.png")));
-		add(tab2x0, "cell 3 1");
-
-		tab0x1 = new JLabel("");
-		tab0x1.setIcon(new ImageIcon(TelaJogo.class.getResource("/JogodaVelha/X - Copia.png")));
-		add(tab0x1, "cell 1 2,alignx right");
-
-		tab1x1 = new JLabel("");
-		tab1x1.setIcon(new ImageIcon(TelaJogo.class.getResource("/JogodaVelha/X - Copia.png")));
-		add(tab1x1, "cell 2 2,alignx center");
-
-		tab2x1 = new JLabel("");
-		tab2x1.setIcon(new ImageIcon(TelaJogo.class.getResource("/JogodaVelha/X - Copia.png")));
-		add(tab2x1, "cell 3 2");
-
-		tab0x2 = new JLabel("");
-		tab0x2.setIcon(new ImageIcon(TelaJogo.class.getResource("/JogodaVelha/X - Copia.png")));
-		add(tab0x2, "cell 1 3,alignx right");
-
-		tab1x2 = new JLabel("");
-		tab1x2.setIcon(new ImageIcon(TelaJogo.class.getResource("/JogodaVelha/X - Copia.png")));
-		add(tab1x2, "cell 2 3,alignx center");
-
-		tab2x2 = new JLabel("");
-		tab2x2.setIcon(new ImageIcon(TelaJogo.class.getResource("/JogodaVelha/X - Copia.png")));
-		add(tab2x2, "cell 3 3");
-
-		btn_refazer = new JButton("Refazer");
-		add(btn_refazer, "cell 2 5");
-
-		System.out.println("AFGDJG");
-		main();
-	}
-
-	public void main() {
-        Tabuleiro tab = new Tabuleiro();
-        Random r = new Random();
-        Stack<String[][]> pilha = new Stack<>();
-        
+    public void main() {
         System.out.println();
         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=");
         System.out.println("    jogadores   ");
@@ -111,118 +62,64 @@ public class TelaJogo extends JPanel {
         System.out.println();
 
         tab.create();
-        boolean ve = true;
-        while (ve) {
-            pilha.push(tab.getCopy());
-
-            tab.getBoard();
-
-            System.out.println("Jogada de " + p1.getName());
-            txt_ve.setText(p1.getName());
-            System.out.println("Coordenada X (1, 2 ou 3): ");
-            int x = e.nextInt();
-            System.out.println("Coordenada Y (1, 2 ou 3): ");
-            int y = e.nextInt();
-
-            if (tab.shot(p1, verifyPosition(y), verifyPosition(x))) {
-                tab.getBoard();
-
-                if (!tab.verify(p1)) {
-                    System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=");
-                    System.out.println("    " + p1.getName() + " ganhou!");
-                    System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=");
-                    break;
-                }
-
-                if (p2.getIA()) {
-                    boolean ia = true;
-                    System.out.println(" ");
-                    System.out.println("Jogada da IA");
-                    System.out.println(" ");
-                    Thread.sleep(2000);
-
-                    while (ia) {
-                        x = r.nextInt(3) + 1;
-                        y = r.nextInt(3) + 1;
-                        if (tab.shot(p2, verifyPosition(x), verifyPosition(x))) {
-                            System.out.println("");
-                            ia = false;
-                        } else {
-                            x = r.nextInt(3) + 1;
-                            y = r.nextInt(3) + 1;
-                        }
-                    }
-
-                    tab.getBoard();
-                    System.out.println("Deseja voltar uma jogada?");
-                    if (verifyString(e.next())) {
-                        tab.setTabuleiro(pilha.pop());
-                    }
-
-                } else {
-                    System.out.println("Jogada de " + p2.getName());
-                    System.out.println("X (1, 2 ou 3): ");
-                    int x2 = e.nextInt();
-                    System.out.println("Y: ");
-                    int y2 = e.nextInt();
-
-                    while (!tab.shot(p2, verifyPosition(y2), verifyPosition(x2))) {
-                        tab.getBoard();
-                        System.out.println("Jogada de " + p2.getName());
-                        System.out.println("X (1, 2 ou 3): ");
-                        x2 = e.nextInt();
-                        System.out.println("Y: ");
-                        y2 = e.nextInt();
-                    }
-                }
-
-                if (!tab.verify(p2)) {
-                    System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=");
-                    System.out.println("    " + p2.getName() + " ganhou!");
-                    System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=");
-                    break;
-                }
-
-            }
-            if (tab.draw()) {
-                System.out.println("Empate!");
-                break;
-
-            }
-        }
     }
 
+    private JLabel createBoardLabel(int index) {
+        JLabel jLabel = new JLabel("", SwingConstants.CENTER);
+        jLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        jLabel.setOpaque(true);
+        jLabel.setName((index / 3) + "," + (index % 3));
 
-    public static boolean verifyString(String bool) {
-        bool = bool.toLowerCase();
-        switch (bool) {
-            case "sim":
-                return true;
-            case "s":
-                return true;
-            case "positivo":
-                return true;
-            case "sum":
-                return true;
-            case "som":
-                return true;
-            default:
-                return false;
+        ImageIcon icon = new ImageIcon(getClass().getResource("./fundo.png"));
+        jLabel.setIcon(icon);
+
+        int row = index / 3;
+        int col = index % 3;
+
+        jLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                handleBoardClick(row, col, jLabel);
+            }
+        });
+
+        return jLabel;
+    }
+
+    private void handleBoardClick(int row, int col, JLabel jLabel) {
+        System.out.println("linha: " + row);
+        System.out.println("coluna: " + col);
+        ImageIcon icon = null;
+
+        if (!currentP.getIA()) {
+            if (tab.shot(currentP, verifyPosition(row), verifyPosition(col))) {
+                if (currentP == p1) {
+                    icon = new ImageIcon(getClass().getResource("./p1.png"));
+                    currentP = p2;
+                } else {
+                    icon = new ImageIcon(getClass().getResource("./p2.png"));
+                    currentP = p1;
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Posição inválida!");
+            }
+        } else {
+            // Lógica para a IA aqui (caso o jogador atual seja IA)
+        }
+
+        if (icon != null) {
+            jLabel.setIcon(icon);
         }
     }
 
     public static int verifyPosition(int num) {
-        if ((num >= 0) && (num <= 3)) {
-            switch (num) {
-                case 1:
-                    return 0;
-                case 2:
-                    return 2;
-                case 3:
-                    return 4;
-            }
-        } else {
-            System.out.println("Numero invalido!");
+        switch (num) {
+            case 0:
+                return 0;
+            case 1:
+                return 2;
+            case 2:
+                return 4;
         }
         return 0;
     }

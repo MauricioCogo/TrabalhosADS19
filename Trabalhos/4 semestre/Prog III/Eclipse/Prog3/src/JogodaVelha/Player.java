@@ -34,6 +34,12 @@ public class Player {
         this.ia = ia;
     }
 
+    public void getWinner() {
+        System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=");
+        System.out.println("    " + this.getName() + " ganhou!");
+        System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=");
+    }
+    
     public String toString() {
         return "Nome: "+this.name+"\nSimbolo: "+this.symbol+"\n";
     }

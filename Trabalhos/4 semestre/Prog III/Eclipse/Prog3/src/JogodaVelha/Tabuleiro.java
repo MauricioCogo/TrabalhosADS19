@@ -58,7 +58,8 @@ public class Tabuleiro {
 
     public Boolean shot(Player p, int x, int y) {
         if (tabuleiro[x][y].equals(" ") ) {
-            tabuleiro[x][y] = p.getSymbol();
+            tabuleiro[x][y] = p.getName();
+            System.out.println("Coloco o nome");
             count++;
             return true;
         } else {

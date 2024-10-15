@@ -1,0 +1,218 @@
+package JogodaVelha;
+
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
+import net.miginfocom.swing.MigLayout;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.LinkedList;
+import java.util.Random;
+import java.util.Scanner;
+import java.util.Stack;
+
+public class TelaJogo extends JPanel {
+
+	private Player p1;
+	private Player p2;
+	private Player currentP;
+	private int x;
+	private int y;
+	Stack<String[][]> pilha = new Stack<>();
+	Random r = new Random();
+	Tabuleiro tab = new Tabuleiro();
+
+	private JLabel txt_vezde;
+	private JButton btn_refazer;
+	private JLabel txt_vez;
+
+	public TelaJogo(Player p1, Player p2) {
+		this.p1 = p1;
+		this.p2 = p2;
+
+		setLayout(new MigLayout("wrap 3", "[grow][grow][grow]", "[]10[]"));
+
+		for (int i = 0; i < 9; i++) {
+			JLabel label = createBoardLabel(i);
+			add(label, "grow");
+		}
+
+		// Initialize txt_vez and btn_refazer
+		txt_vez = new JLabel("Current turn: ");
+		btn_refazer = new JButton("Refazer");
+		add(txt_vez, "span 3"); // Span across 3 columns
+		add(btn_refazer, "span 3"); // Span across 3 columns
+		main();
+	}
+
+	public void main() {
+		Random r = new Random();
+		Scanner e = new Scanner(System.in);
+		currentP = p1;
+
+		System.out.println();
+		System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=");
+		System.out.println("    jogadores   ");
+		System.out.println(p1.getName() + " : " + p1.getSymbol());
+		System.out.println(p2.getName() + " : " + p2.getSymbol());
+		System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=");
+		System.out.println();
+
+		tab.create();
+
+	}
+
+	private JLabel createBoardLabel(int index) {
+		JLabel jLabel = new JLabel("", SwingConstants.CENTER);
+		jLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		jLabel.setOpaque(true);
+		jLabel.setName((index / 3) + "," + (index % 3));
+
+		ImageIcon icon = new ImageIcon(getClass().getResource("./fundo.png")); //
+		jLabel.setIcon(icon);
+
+		int row = index / 3;
+		int col = index % 3;
+
+		jLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				handleBoardClick(row, col, jLabel);
+			}
+		});
+
+		return jLabel;
+	}
+
+	private void handleBoardClick(int row, int col, JLabel jLabel) {
+		System.out.println("linha: " + row);
+		System.out.println("a: " + col);
+		ImageIcon icon = null; //
+		if (tab.shot(currentP, verifyPosition(row), verifyPosition(col))) {
+			if (currentP == p1) {
+				icon = new ImageIcon(getClass().getResource("./p1.png")); //
+				jLabel.setIcon(icon);
+				currentP = p2;
+				
+				if(currentP.getIA()) {
+					boolean ia = true;
+					System.out.println(" ");
+					System.out.println("Jogada da IA");
+					System.out.println(" ");
+					currentP = p2;
+
+					while (ia) {
+						int x = r.nextInt()*3;
+						int y = r.nextInt()*3;
+						System.out.println(x+" "+y);
+						if (tab.shot(p2, verifyPosition(y), verifyPosition(x))) {
+							System.out.println("a IA jogo");
+							ia = false;
+						}else {
+							System.out.println("ta tentando joga");
+						}
+					}
+				}
+				
+			} else {
+				System.out.println("é a vez d o2");
+				icon = new ImageIcon(getClass().getResource("./p2.png")); //
+				currentP = p1;
+			}
+		} else {
+			JOptionPane.showMessageDialog(this, "Posição invalida!");
+		}
+		if (icon != null) {
+			jLabel.setIcon(icon);
+		}
+	}
+
+	/*private void play(Player p) {
+		boolean ve = true;
+		while (ve) {
+			pilha.push(tab.getCopy());
+
+			tab.getBoard();
+
+			System.out.println("Jogada de " + p1.getName());
+			txt_vez.setText("Jogada de " + p1.getName());
+
+			if (!tab.verify(p)) {
+				p.getWinner();
+				break;
+			}
+
+			if (p2.getIA()) {
+				boolean ia = true;
+				System.out.println(" ");
+				System.out.println("Jogada da IA");
+				System.out.println(" ");
+				currentP = p2;
+
+				while (ia) {
+					if (tab.shot(p2, verifyPosition(y), verifyPosition(x))) {
+						System.out.println("");
+						ia = false;
+					}
+				}
+
+				tab.getBoard();
+				System.out.println("Deseja voltar uma jogada?");
+				if (verifyString(e.next())) {
+					tab.setTabuleiro(pilha.pop());
+				}
+
+			} else {
+				System.out.println("Jogada de " + p2.getName());
+				System.out.println("X (1, 2 ou 3): ");
+				int x2 = e.nextInt();
+				System.out.println("Y: ");
+				int y2 = e.nextInt();
+
+				while (!tab.shot(p2, verifyPosition(y2), verifyPosition(x2))) {
+					tab.getBoard();
+					System.out.println("Jogada de " + p2.getName());
+					System.out.println("X (1, 2 ou 3): ");
+					x2 = e.nextInt();
+					System.out.println("Y: ");
+					y2 = e.nextInt();
+				}
+			}
+
+			// Verifica se o jogador 2 ganhou
+			if (!tab.verify(p2)) {
+				p2.getWinner();
+				break;
+			}
+
+		}
+
+		// Verifica se o jogo terminou em empate
+		if (tab.draw()) {
+			System.out.println("Empate!");
+			break;
+		}
+
+	}*/
+
+	public static int verifyPosition(int num) {
+		switch (num) {
+		case 0:
+			return 0;
+		case 1:
+			return 2;
+		case 2:
+			return 4;
+		}
+		return 0;
+	}
+}

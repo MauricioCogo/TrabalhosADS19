@@ -15,12 +15,8 @@ public class TelaInicial extends JPanel {
 
 	private JTextField field_name;
 	private JTextField field_name2;
-	private JTextField field_simbol1;
-	private JTextField field_simbol2;
 	private JLabel txt_name;
 	private JLabel txt_name2;
-	private JLabel txt_simbol1;
-	private JLabel txt_simbol2;
 	private JButton btn_comecar;
 
 	/**
@@ -47,20 +43,6 @@ public class TelaInicial extends JPanel {
 		add(field_name2, "cell 1 4,growx");
 		field_name2.setColumns(10);
 
-		txt_simbol1 = new JLabel("Simbolo do player 1:");
-		add(txt_simbol1, "cell 0 6,alignx trailing");
-
-		field_simbol1 = new JTextField();
-		add(field_simbol1, "cell 1 6,growx");
-		field_simbol1.setColumns(10);
-
-		txt_simbol2 = new JLabel("Simbolo do player 2:");
-		add(txt_simbol2, "cell 0 7,alignx trailing");
-
-		field_simbol2 = new JTextField();
-		add(field_simbol2, "cell 1 7,growx");
-		field_simbol2.setColumns(10);
-
 		JCheckBox chk_computador = new JCheckBox("Jogar contra o computador?");
 		chk_computador.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -77,28 +59,6 @@ public class TelaInicial extends JPanel {
 		});
 		add(chk_computador, "cell 1 3");
 
-		JCheckBox chck_padrao = new JCheckBox("Simbolos padrão (X e O)");
-		chck_padrao.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (chck_padrao.isSelected()) {
-					field_simbol1.setEditable(false);
-					field_simbol1.setEnabled(false);
-					field_simbol2.setEditable(false);
-					field_simbol2.setEnabled(false);
-					field_simbol1.setText("X");
-					field_simbol2.setText("O");
-				} else {
-					field_simbol1.setEditable(true);
-					field_simbol1.setEnabled(true);
-					field_simbol2.setEditable(true);
-					field_simbol2.setEnabled(true);
-					field_simbol1.setText("");
-					field_simbol2.setText("");
-				}
-			}
-		});
-		add(chck_padrao, "cell 1 5");
-
 		btn_comecar = new JButton("Come\u00E7ar");
 		btn_comecar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -107,28 +67,17 @@ public class TelaInicial extends JPanel {
 				char simbol2 = 'O';
 
 				if (verifyStrings()) {
-					if (field_simbol1.getText().length() > 1) {
-						simbol1 = field_simbol1.getText().toUpperCase().charAt(0);
-						JOptionPane.showMessageDialog(btn_comecar.getParent(),
-								"Você digitou mais de um caractere para o player 1. O simbolo dele será: " + simbol1);
-					}
-					if (field_simbol2.getText().length() > 1) {
-						simbol2 = field_simbol2.getText().toUpperCase().charAt(0);
-						JOptionPane.showMessageDialog(btn_comecar.getParent(),
-								"Você digitou mais de um caractere para o player 2. O simbolo dele será: " + simbol2);
-					}
 
 					Player p1 = new Player();
 					p1.setName(field_name.getText());
-					p1.setSymbol(field_simbol1.getText());
 					Player p2 = new Player();
 					p2.setName(field_name2.getText());
-					p2.setSymbol(field_simbol2.getText());
 					p2.setIA(chk_computador.isSelected());
 					System.out.println(p1.toString());
 					System.out.println(p2.toString());
 					
 					Janela.frame.setContentPane(new TelaJogo(p1,p2));
+					Janela.frame.setVisible(true);
 				}
 			}
 		});
@@ -144,19 +93,6 @@ public class TelaInicial extends JPanel {
 		if (field_name2.getText().isBlank()) {
 			JOptionPane.showMessageDialog(btn_comecar.getParent(), "Nome do player 2 vazio!");
 			return false; // Interrompe a execução do método
-		}
-		if (field_simbol1.getText().isBlank()) {
-			JOptionPane.showMessageDialog(btn_comecar.getParent(), "Simbolo do player 1 vazio!");
-			return false; // Interrompe a execução do método
-		}
-		if (field_simbol2.getText().isBlank()) {
-			JOptionPane.showMessageDialog(btn_comecar.getParent(), "Simbolo do player 2 vazio!");
-			return false; // Interrompe a execução do método
-		}
-		if (field_simbol1.getText().toUpperCase().charAt(0) == field_simbol2.getText().toUpperCase().charAt(0)) {
-			JOptionPane.showMessageDialog(btn_comecar.getParent(),
-					"Não é possivel colocar o mesmo simbolo para ambos jogadores!");
-			return false;
 		}
 		return true;
 
