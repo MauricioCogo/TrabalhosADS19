@@ -3,11 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/2023001236/Documents/TrabalhosADS19/Trabalhos/4 semestre/Desenvolvimento Para Dispositivos Mobile/homebankads/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/dboemo/AndroidStudioProjects/homebankads/app/src/main/res/layout/activity_main.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/dboemo/AndroidStudioProjects/homebankads/app/src/main/res/layout/activity_telaextrato.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/dboemo/AndroidStudioProjects/homebankads/app/src/main/res/layout/activity_telamovimentos.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/dboemo/AndroidStudioProjects/homebankads/app/src/main/res/layout/activity_telaprincipal.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/dboemo/AndroidStudioProjects/homebankads/app/src/main/res/layout/activity_telaregistro.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/dboemo/AndroidStudioProjects/homebankads/app/src/main/res/layout/layout_dialog.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/dboemo/AndroidStudioProjects/homebankads/app/src/main/res/layout/layout_pgto.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/dboemo/AndroidStudioProjects/homebankads/app/src/main/res/layout/layout_transf.xml" value="0.1" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="jbr-17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

@@ -34,7 +34,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/editTextEmail"
+            android:id="@+id/edtemail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -52,7 +52,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/editTextsenha"
+            android:id="@+id/edtsenha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
