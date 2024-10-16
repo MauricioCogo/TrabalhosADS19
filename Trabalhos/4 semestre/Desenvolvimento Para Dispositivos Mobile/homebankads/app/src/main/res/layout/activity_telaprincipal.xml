@@ -44,7 +44,7 @@
                         android:id="@+id/txtcorrentista"
                         android:layout_width="match_parent"
                         android:layout_height="34dp"
-                        android:text=""
+                        android:text="Fulano de tal"
                         android:textSize="24sp" />
 
                     <LinearLayout
@@ -63,7 +63,7 @@
                             android:id="@+id/txtsaldo"
                             android:layout_width="207dp"
                             android:layout_height="34dp"
-                            android:text=""
+                            android:text="R$ 99,99"
                             android:textSize="24sp" />
 
 

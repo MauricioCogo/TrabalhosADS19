@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/2023001236/Documents/homebankads/app/src/main/res/layout/activity_telaextrato.xml" value="0.22" />
+        <entry key="..\:/Users/2023001236/Documents/homebankads/app/src/main/res/layout/layout_movimentos.xml" value="0.2767210144927536" />
         <entry key="..\:/Users/dboemo/AndroidStudioProjects/homebankads/app/src/main/res/layout/activity_main.xml" value="0.22552083333333334" />
         <entry key="..\:/Users/dboemo/AndroidStudioProjects/homebankads/app/src/main/res/layout/activity_telaextrato.xml" value="0.22552083333333334" />
         <entry key="..\:/Users/dboemo/AndroidStudioProjects/homebankads/app/src/main/res/layout/activity_telamovimentos.xml" value="0.22552083333333334" />
@@ -14,7 +16,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="jbr-17" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17_PREVIEW" project-jdk-name="jbr-17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

@@ -13,26 +13,30 @@
         android:layout_width="424dp"
         android:layout_height="115dp"
         app:srcCompat="@drawable/icon_bill" />
+    <Button
+        android:id="@+id/btextratret"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Retornar" />
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mês" />
+
+    <Spinner
+        android:id="@+id/spmes"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:entries="@array/lista_mes"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="11dp" />
 
     <TextView
-            android:id="@+id/textView5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Mês" />
-
-        <Spinner
-            android:id="@+id/spmes"
-            android:layout_width="409dp"
-            android:layout_height="wrap_content"
-            android:entries="@array/lista_mes"
-            tools:layout_editor_absoluteX="1dp"
-            tools:layout_editor_absoluteY="11dp" />
-
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Ano" />
+        android:id="@+id/textView6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ano" />
     <Spinner
         android:id="@+id/spano"
         android:layout_width="409dp"
@@ -50,12 +54,8 @@
     <ListView
         android:id="@+id/listViewMovimentos"
         android:layout_width="match_parent"
-        android:layout_height="376dp" />
+        android:layout_height="376dp" >
 
-    <Button
-        android:id="@+id/btextratret"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Retornar" />
+    </ListView>
 
 </LinearLayout>

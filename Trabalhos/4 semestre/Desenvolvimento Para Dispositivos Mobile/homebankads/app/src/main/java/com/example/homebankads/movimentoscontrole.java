@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -23,48 +24,73 @@ public class movimentoscontrole {
     }
 
     @SuppressLint("Range")
-    public ArrayList<movimentos> buscaMovimentos(String idUsuario, int ano, int mes) {
-        ArrayList<movimentos> listaMovimentos = new ArrayList<>();
+    public List<movimentos> buscaMovimentos(String idUsuario, int ano, int mes) {
+        List<movimentos> operacoes = new ArrayList<>();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()); // Formato da data na base
 
         // Define a consulta SQL
-        String BUSCA_MOVIMENTOS = "SELECT * FROM movimento WHERE idusr = ? AND " +
-                "strftime('%Y', dataopera) = ? AND " +
-                "strftime('%m', dataopera) = ?";
+        String BUSCA_MOVIMENTOS = "SELECT \n" +
+                "    idmov AS id_movimento,\n" +
+                "    idusr AS id_usuario,\n" +
+                "    tipo_opera AS tipo_operacao,\n" +
+                "    valor AS valor_operacao,\n" +
+                "    destino AS destino_operacao,\n" +
+                "    substr(dataopera, -4) AS ano,  -- Extrai os últimos 4 caracteres (o ano)\n" +
+                "    CASE substr(dataopera, 5, 3)\n" +
+                "        WHEN 'Jan' THEN '01'\n" +
+                "        WHEN 'Feb' THEN '02'\n" +
+                "        WHEN 'Mar' THEN '03'\n" +
+                "        WHEN 'Apr' THEN '04'\n" +
+                "        WHEN 'May' THEN '05'\n" +
+                "        WHEN 'Jun' THEN '06'\n" +
+                "        WHEN 'Jul' THEN '07'\n" +
+                "        WHEN 'Aug' THEN '08'\n" +
+                "        WHEN 'Sep' THEN '09'\n" +
+                "        WHEN 'Oct' THEN '10'\n" +
+                "        WHEN 'Nov' THEN '11'\n" +
+                "        WHEN 'Dec' THEN '12'\n" +
+                "    END AS mes\n" +
+                "FROM movimento \n" +
+                "WHERE idusr = ? AND mes = ? AND ano = ?";
 
-        SQLiteDatabase db = banco.getReadableDatabase();
+        Log.d("teste",BUSCA_MOVIMENTOS);
 
-        // Usa o método rawQuery para executar a consulta
-        Cursor cursor = db.rawQuery(BUSCA_MOVIMENTOS, new String[]{idUsuario, String.valueOf(ano), String.format("%02d", mes)});
+        try (SQLiteDatabase db = banco.getReadableDatabase();
+             Cursor cursor = db.rawQuery(BUSCA_MOVIMENTOS, new String[]{idUsuario, String.valueOf(ano), String.format("%02d", mes)})) {
+            Log.d("teste", cursor.toString());
+            if (cursor != null && cursor.moveToFirst()) {
+                do {
+                    Log.d("teste", "pego mais um");
 
-        // Processa o cursor e adiciona os movimentos à lista
-        if (cursor != null) {
-            while (cursor.moveToNext()) {
-                // Cria um novo objeto Movimentos e preenche os dados
-                movimentos movimento = new movimentos();
-                movimento.setIdusr(cursor.getInt(cursor.getColumnIndex("idusr")));
-                movimento.setTipo_opera(cursor.getString(cursor.getColumnIndex("tipo_opera")));
-                movimento.setValor(cursor.getDouble(cursor.getColumnIndex("valor")));
-                movimento.setDestino(cursor.getString(cursor.getColumnIndex("destino")));
+                    // Cria um novo objeto Movimentos e preenche os dados
+                    movimentos movimento = new movimentos();
+                    movimento.setIdusr(cursor.getInt(cursor.getColumnIndex("idusr")));
+                    movimento.setTipo_opera(cursor.getString(cursor.getColumnIndex("tipo_opera")));
+                    movimento.setValor(cursor.getDouble(cursor.getColumnIndex("valor")));
+                    movimento.setDestino(cursor.getString(cursor.getColumnIndex("destino")));
 
-                // Converte a string da data para Date
-                String dataString = cursor.getString(cursor.getColumnIndex("dataopera"));
-                try {
-                    Date dataOpera = dateFormat.parse(dataString);
-                    movimento.setDataopera(dataOpera); // Assumindo que setDataopera aceita Date
-                } catch (ParseException e) {
-                    e.printStackTrace(); // Trate a exceção conforme necessário
-                }
+                    // Converte a string da data para Date
+                    String dataString = cursor.getString(cursor.getColumnIndex("dataopera"));
+                    try {
+                        Date dataOpera = dateFormat.parse(dataString);
+                        movimento.setDataopera(dataOpera); // Assumindo que setDataopera aceita Date
+                    } catch (ParseException e) {
+                        Log.e("Erro", "Erro ao parsear a data: " + dataString, e);
+                    }
 
-                // Adiciona o movimento à lista
-                listaMovimentos.add(movimento);
+                    // Adiciona o movimento à lista
+                    operacoes.add(movimento);
+                    Log.d("teste", "add mais um");
+
+                } while (cursor.moveToNext());
             }
-            cursor.close(); // Fecha o cursor
+        } catch (Exception e) {
+            Log.e("Erro", "Erro ao buscar movimentos", e);
         }
-        db.close(); // Fecha o banco de dados
 
-        return listaMovimentos; // Retorna a lista de movimentos
+        return operacoes; // Retorna a lista de movimentos
     }
+
 
 
 
@@ -113,3 +139,4 @@ public class movimentoscontrole {
     }
 
 }
+

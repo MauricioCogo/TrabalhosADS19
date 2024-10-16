@@ -1,6 +1,5 @@
 package com.example.homebankads;
 
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
 import java.util.Calendar;
 
 public class telamovimentos extends AppCompatActivity {
@@ -45,7 +43,7 @@ public class telamovimentos extends AppCompatActivity {
                         movi.setDestino("Conta corrente");
                         Calendar c = Calendar.getInstance();
                         movi.setDataopera((c.getTime()));
-                        Log.d("aaaaa", movi.toString());
+                        Log.d("dasdd", movi.toString());
                         movic.insere_movimento(movi);                    }
                 });
                 alertDialogBuilder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -106,7 +104,15 @@ public class telamovimentos extends AppCompatActivity {
                 alertDialogBuilder.setTitle("Efetuar pagamento ");
                 alertDialogBuilder.setPositiveButton("Ok",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // aqui você faz a gravação do depósito ->
+                        movimentoscontrole movic = new movimentoscontrole(telamovimentos.this);
+                        movimentos movi = new movimentos();
+                        movi.setValor(Double.parseDouble(Valordigitado.getText().toString()));
+                        movi.setTipo_opera("Pagamento");
+                        movi.setIdusr(idusr);
+                        movi.setDestino(Objeto.getText().toString());
+                        Calendar c = Calendar.getInstance();
+                        movi.setDataopera((c.getTime()));
+                        movic.insere_movimento(movi);
                     }
                 });
                 alertDialogBuilder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -128,11 +134,19 @@ public class telamovimentos extends AppCompatActivity {
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
                 alertDialogBuilder.setView(promptUserView);
                 final EditText Valordigitado = (EditText) promptUserView.findViewById(R.id.edit_Valor_transf);
-                final EditText Objeto = (EditText) promptUserView.findViewById(R.id.edit_destino_transf);
+                final EditText Pessoa = (EditText) promptUserView.findViewById(R.id.edit_destino_transf);
                 alertDialogBuilder.setTitle("Efetuar Transferencia ");
                 alertDialogBuilder.setPositiveButton("Ok",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // aqui você faz a gravação do depósito ->
+                        movimentoscontrole movic = new movimentoscontrole(telamovimentos.this);
+                        movimentos movi = new movimentos();
+                        movi.setValor(Double.parseDouble(Valordigitado.getText().toString()));
+                        movi.setTipo_opera("Transferência");
+                        movi.setIdusr(idusr);
+                        movi.setDestino(Pessoa.getText().toString());
+                        Calendar c = Calendar.getInstance();
+                        movi.setDataopera((c.getTime()));
+                        movic.insere_movimento(movi);
                     }
                 });
                 alertDialogBuilder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {

@@ -1,5 +1,4 @@
 package com.example.homebankads;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -19,7 +18,7 @@ public class usuariocontrole {
     }
     public boolean insereUsuario(usuario usr) {
 
-        if(usr.getLogin().isBlank() || usr.getSenha().isBlank()){
+        if(usr.getLogin().isEmpty() || usr.getSenha().isEmpty()){
             return false;
         }
 
@@ -63,7 +62,7 @@ public class usuariocontrole {
 
     public usuario retornaDadosUsuario(String login) {
         usuario usr = null;
-        if (login.isBlank()){
+        if (login.isEmpty()){
             return usr;
         }
         String CONSULTA_USUARIO = "SELECT * FROM usuario WHERE login = ?";
@@ -114,7 +113,7 @@ public class usuariocontrole {
     }
 
     public boolean testaUsuario(String nome) {
-        if(!nome.isBlank()){
+        if(!nome.isEmpty()){
             return false;
         }
         String PESQUISA_POR_NOME="SELECT id FROM usuario WHERE login ='"+nome+"'";
@@ -138,7 +137,7 @@ public class usuariocontrole {
 
     public boolean checkusuario(String nome, String senha) {
         // Verifica se o nome ou senha estão vazios
-        if (nome == null || nome.isBlank() || senha == null || senha.isBlank()) {
+        if (nome == null || nome.isEmpty() || senha == null || senha.isEmpty()) {
             return false;
         }
 

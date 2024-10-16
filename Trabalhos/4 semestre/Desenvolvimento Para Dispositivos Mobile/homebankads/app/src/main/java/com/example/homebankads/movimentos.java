@@ -2,7 +2,6 @@ package com.example.homebankads;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 public class movimentos {
 
@@ -14,6 +13,7 @@ public class movimentos {
     Date dataopera;
 
     public movimentos() {
+
     }
 
     public movimentos(int idmov, int idusr, String tipo_opera, double valor, String destino, Date dataopera) {
@@ -72,11 +72,10 @@ public class movimentos {
     public void setDataopera(Date dataopera) {
         this.dataopera = dataopera;
     }
-
     @Override
     public String toString() {
-        // Formata a data como "dd/MM/yyyy"
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-        return "Tipo: " + tipo_opera + ", Valor: R$ " + valor + ", Data: " + dateFormat.format(dataopera);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String dataFormatada = sdf.format(dataopera);
+        return tipo_opera + ": " + valor + " (" + destino + ") em " + dataFormatada;
     }
 }
