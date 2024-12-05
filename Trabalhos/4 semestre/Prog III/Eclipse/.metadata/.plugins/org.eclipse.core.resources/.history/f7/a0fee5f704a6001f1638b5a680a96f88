@@ -1,0 +1,31 @@
+package Main;
+
+import java.util.List;
+
+import entity.Vehicle;
+import repository.*;
+public class Main {
+
+	public static void main(String[] args) {
+		VehiclesRepository vr = new VehiclesRepository();
+		System.out.println(vr.getCone());
+		if(vr.createVehicle("mauricio", "djones", 30)) {
+			System.out.println("ioafgjsiofdg");
+		}else {
+			System.out.println("burrão");
+		}
+		
+		List<Vehicle> vehicles = vr.getAllVehicles();
+		List<Vehicle> marca = vr.getVehiclesByMarca("mauricio");
+		
+		for (Vehicle vei : vehicles) {
+			System.out.println(vei.toString());
+		}
+		
+		System.out.println("sdfsd");
+		for (Vehicle vei : marca) {
+			System.out.println(vei.toString());
+		}
+	}
+
+}

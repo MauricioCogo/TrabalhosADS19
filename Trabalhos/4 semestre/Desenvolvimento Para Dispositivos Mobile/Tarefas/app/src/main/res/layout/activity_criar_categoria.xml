@@ -1,0 +1,43 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:gravity="top">
+
+    <!-- Título da tela -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Criar Categoria"
+        android:layout_gravity="center"
+        android:textSize="18sp"
+        android:layout_marginBottom="24dp"
+        android:textColor="#333333"/>
+
+    <!-- Campo para nome da categoria -->
+    <EditText
+        android:id="@+id/editTextNomeCategoria"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nome da Categoria"
+        android:padding="12dp"
+        android:textColor="#333333"/>
+
+    <!-- Spinner para selecionar a cor -->
+    <Spinner
+        android:id="@+id/colorSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"/>
+
+
+    <!-- Botão para salvar a categoria -->
+    <Button
+        android:id="@+id/btnSalvarCategoria"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Salvar Categoria"
+        android:layout_marginTop="32dp"
+        android:textColor="#FFFFFF"/>
+</LinearLayout>

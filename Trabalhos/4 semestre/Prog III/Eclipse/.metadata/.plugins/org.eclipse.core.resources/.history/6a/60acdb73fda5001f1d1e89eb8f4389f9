@@ -1,0 +1,35 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class PostgresConnection {
+
+    // Parâmetros da conexão
+    private static final String URL = "jdbc:postgresql://localhost:5432/seu_banco";
+    private static final String USER = "seu_usuario";
+    private static final String PASSWORD = "sua_senha";
+
+    // Método para obter uma conexão com o banco
+    public static Connection getConnection() throws SQLException {
+        try {
+            // Carrega o driver do PostgreSQL (opcional nas versões mais recentes do Java)
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("Driver do PostgreSQL não encontrado!", e);
+        }
+        
+        // Retorna a conexão
+        return DriverManager.getConnection(URL, USER, PASSWORD);
+    }
+
+    public static void main(String[] args) {
+        // Teste da conexão
+        try (Connection connection = PostgresConnection.getConnection()) {
+            if (connection != null) {
+                System.out.println("Conexão estabelecida com sucesso!");
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro ao conectar ao banco: " + e.getMessage());
+        }
+    }
+}

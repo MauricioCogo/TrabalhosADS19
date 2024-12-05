@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/2023001236/Documents/TrabalhosADS19/Trabalhos/4 semestre/Desenvolvimento Para Dispositivos Mobile/Tarefas/app/src/main/res/drawable-v24/bg_subtask_item.xml" value="0.1" />
+        <entry key="..\:/Users/2023001236/Documents/TrabalhosADS19/Trabalhos/4 semestre/Desenvolvimento Para Dispositivos Mobile/Tarefas/app/src/main/res/drawable-v24/bg_task_header.xml" value="0.1" />
+        <entry key="..\:/Users/2023001236/Documents/TrabalhosADS19/Trabalhos/4 semestre/Desenvolvimento Para Dispositivos Mobile/Tarefas/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/Users/2023001236/Documents/TrabalhosADS19/Trabalhos/4 semestre/Desenvolvimento Para Dispositivos Mobile/Tarefas/app/src/main/res/layout/activity_cadastrar.xml" value="0.1" />
+        <entry key="..\:/Users/2023001236/Documents/TrabalhosADS19/Trabalhos/4 semestre/Desenvolvimento Para Dispositivos Mobile/Tarefas/app/src/main/res/layout/activity_criar_categoria.xml" value="0.25" />
+        <entry key="..\:/Users/2023001236/Documents/TrabalhosADS19/Trabalhos/4 semestre/Desenvolvimento Para Dispositivos Mobile/Tarefas/app/src/main/res/layout/activity_main.xml" value="0.3151041666666667" />
+        <entry key="..\:/Users/2023001236/Documents/TrabalhosADS19/Trabalhos/4 semestre/Desenvolvimento Para Dispositivos Mobile/Tarefas/app/src/main/res/layout/activity_tela_principal.xml" value="0.1" />
+        <entry key="..\:/Users/2023001236/Documents/TrabalhosADS19/Trabalhos/4 semestre/Desenvolvimento Para Dispositivos Mobile/Tarefas/app/src/main/res/layout/item_subtarefa.xml" value="0.125" />
+        <entry key="..\:/Users/2023001236/Documents/TrabalhosADS19/Trabalhos/4 semestre/Desenvolvimento Para Dispositivos Mobile/Tarefas/app/src/main/res/layout/item_tarefa.xml" value="0.1" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

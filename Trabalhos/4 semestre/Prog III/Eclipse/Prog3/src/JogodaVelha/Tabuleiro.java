@@ -4,6 +4,14 @@ public class Tabuleiro {
 
     private String[][] tabuleiro = new String[5][5];
     private int count = 0;
+    
+    public void setCount(int count) {
+		this.count = count;
+	}
+    
+    public int getCount() {
+		return count;
+	}
 
     public void create() {
         for (int i = 0; i < 5; i++) {
@@ -28,7 +36,7 @@ public class Tabuleiro {
         this.tabuleiro = tabuleiro;
     }
 
-    public void getBoard() {
+    public String[][] getBoard() {
 
         System.out.println("");
         System.out.println("-=-=-=-=-=-=-=-=-=-");
@@ -44,6 +52,7 @@ public class Tabuleiro {
         }
         System.out.println("-=-=-=-=-=-=-=-=-=-");
         System.out.println(" ");
+		return tabuleiro;
     }
 
     public String[][] getCopy(){
@@ -58,7 +67,7 @@ public class Tabuleiro {
 
     public Boolean shot(Player p, int x, int y) {
         if (tabuleiro[x][y].equals(" ") ) {
-            tabuleiro[x][y] = p.getName();
+            tabuleiro[x][y] = p.getSymbol();
             System.out.println("Coloco o nome");
             count++;
             return true;
@@ -117,10 +126,14 @@ public class Tabuleiro {
         return false;
     }
 
-    public boolean draw(){
-        if (count==9) {
-            return true;
+    public boolean draw() {
+        for (int i = 0; i < 5; i += 2) {
+            for (int j = 0; j < 5; j += 2) {
+                if (tabuleiro[i][j].equals(" ")) {
+                    return false;
+                }
+            }
         }
-        return false;
+        return true;
     }
 }

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#f7f7f7">
+
+    <!-- Barra Superior -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:background="#6200EE"
+        android:gravity="center_vertical">
+
+        <!-- Ícone do Usuário -->
+        <ImageView
+            android:id="@+id/user_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/lata"
+            android:contentDescription="Ícone do usuário"
+            android:tint="@android:color/white" />
+
+        <!-- Nome do Usuário -->
+        <TextView
+            android:id="@+id/nomeusuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome do Usuário"
+            android:textSize="20sp"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Botão para Criar Tarefa ou Categoria -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:background="#EEEEEE"
+        android:gravity="center">
+
+        <!-- Botão Criar Tarefa -->
+        <Button
+            android:id="@+id/btn_criar_tarefa"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Criar Tarefa"
+            android:backgroundTint="#6200EE"
+            android:textColor="@android:color/white"
+            android:layout_marginEnd="8dp"
+            android:elevation="4dp" />
+
+        <!-- Botão Criar Categoria -->
+        <Button
+            android:id="@+id/btn_criar_categoria"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Criar Categoria"
+            android:backgroundTint="#6200EE"
+            android:textColor="@android:color/white"
+            android:elevation="4dp" />
+    </LinearLayout>
+
+    <!-- RecyclerView para listar as tarefas -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_tarefas"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="16dp"
+        android:clipToPadding="false"
+        android:scrollbars="vertical" />
+</LinearLayout>

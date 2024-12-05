@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center"
+    android:background="#F2F2F2">
+
+    <!-- Título do aplicativo -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bem-vindo!"
+        android:textSize="24sp"
+        android:textColor="#333333"
+        android:layout_marginBottom="40dp"/>
+
+    <!-- Campo para o e-mail -->
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="E-mail"
+        android:inputType="textEmailAddress"
+        android:padding="10dp"
+        android:background="@drawable/edittext_background"
+        android:layout_marginBottom="16dp"
+        android:textColor="#333333"/>
+
+    <!-- Campo para a senha -->
+    <EditText
+        android:id="@+id/senha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Senha"
+        android:inputType="textPassword"
+        android:padding="10dp"
+        android:background="@drawable/edittext_background"
+        android:layout_marginBottom="24dp"
+        android:textColor="#333333"/>
+
+    <!-- Botão de login -->
+    <Button
+        android:id="@+id/login_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Entrar"
+        android:textColor="#FFFFFF"
+        android:background="@color/colorPrimary"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Link para a tela de cadastro -->
+    <TextView
+        android:id="@+id/cadastro_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Não tem conta? Cadastre-se"
+        android:textColor="@color/colorAccent"
+        android:clickable="true"
+        android:layout_marginTop="16dp"/>
+
+</LinearLayout>

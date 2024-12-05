@@ -1,0 +1,129 @@
+package repository;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import Main.PostgresConnection;
+import entity.Vehicle;
+public class VehiclesRepository {
+	Connection cone;
+	
+	public String getCone() {
+		try {
+			cone = new PostgresConnection().getConnection();
+			return "Conectou";
+		} catch (Exception e) {
+			// TODO: handle exception
+			return e.getMessage();
+		}
+	}
+	
+	public boolean createVehicle(String marca, String modelo, int ano) {
+		String SQL = "INSERT INTO vehicles (marca, modelo, ano) VALUES (?, ?, ?)";
+        
+        try (Connection connection = PostgresConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SQL)) {
+
+            preparedStatement.setString(1, marca);
+            preparedStatement.setString(2, modelo);
+            preparedStatement.setInt(3, ano);
+            
+            int rowsAffected = preparedStatement.executeUpdate();
+            
+            System.out.println(rowsAffected);
+
+            return rowsAffected > 0;
+
+        } catch (SQLException e) {
+            System.err.println("Erro ao inserir veículo: " + e.getMessage());
+            return false;
+        }
+	}
+	
+	public List<Vehicle> getAllVehicles() {
+        String SQL = "SELECT id, marca, modelo, ano FROM vehicles"; // A consulta para buscar todos os veículos
+        List<Vehicle> vehicles = new ArrayList<>();
+
+        try (Connection connection = PostgresConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            // Itera sobre o ResultSet e adiciona os dados na lista
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String marca = resultSet.getString("marca");
+                String modelo = resultSet.getString("modelo");
+                int ano = resultSet.getInt("ano");
+
+                Vehicle vehicle = new Vehicle(id, marca,modelo,ano);
+                // Adiciona a string formatada com os dados do veículo
+                vehicles.add(vehicle);
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Erro ao buscar veículos: " + e.getMessage());
+        }
+        return vehicles;
+    }
+	
+	public List<Vehicle> getVehiclesByMarca(String marca) {
+        String SQL = "SELECT id, marca, modelo, ano FROM vehicles WHERE marca = ?"; // Consulta com filtro por marca
+        List<Vehicle> vehicles = new ArrayList<>();
+
+        try (Connection connection = PostgresConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SQL)) {
+
+            // Define o parâmetro da consulta
+            preparedStatement.setString(1, marca);
+            
+            // Executa a consulta e obtém os resultados
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                // Itera sobre o ResultSet e adiciona os dados na lista
+                while (resultSet.next()) {
+                    int id = resultSet.getInt("id");
+                    String modelo = resultSet.getString("modelo");
+                    int ano = resultSet.getInt("ano");
+
+                    Vehicle vehicle = new Vehicle(id, marca, modelo, ano);
+                    vehicles.add(vehicle);
+                }
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Erro ao buscar veículos: " + e.getMessage());
+        }
+        return vehicles;
+    }
+	
+	public List<Vehicle> getVehiclesByModelo(String modelo) {
+	    String SQL = "SELECT id, marca, modelo, ano FROM vehicles WHERE modelo = ?";
+	    List<Vehicle> vehicles = new ArrayList<>();
+
+	    try (Connection connection = PostgresConnection.getConnection();
+	         PreparedStatement preparedStatement = connection.prepareStatement(SQL)) {
+
+	        preparedStatement.setString(1, modelo);
+	        
+	        try (ResultSet resultSet = preparedStatement.executeQuery()) {
+	            while (resultSet.next()) {
+	                int id = resultSet.getInt("id");
+	                String marca = resultSet.getString("marca");
+	                int ano = resultSet.getInt("ano");
+
+	                Vehicle vehicle = new Vehicle(id, marca, modelo, ano);
+	                vehicles.add(vehicle);
+	            }
+	        }
+
+	    } catch (SQLException e) {
+	        System.err.println("Erro ao buscar veículos: " + e.getMessage());
+	    }
+	    return vehicles;
+	}
+
+}

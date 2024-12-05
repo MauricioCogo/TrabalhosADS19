@@ -1,0 +1,17 @@
+package Main;
+
+import repository.*;
+public class Main {
+
+	public static void main(String[] args) {
+		VehiclesRepository vr = new VehiclesRepository();
+		System.out.println(vr.getCone());		
+		vr.getAllTables();
+		if(vr.createVehicle("mauricio", "djones", 30)) {
+			System.out.println("ioafgjsiofdg");
+		}else {
+			System.out.println("burrão");
+		}
+	}
+
+}

@@ -1,0 +1,38 @@
+package Main;
+
+import java.util.List;
+
+import entity.Vehicle;
+import repository.*;
+import service.VehicleService;
+public class Main {
+
+	public static void main(String[] args) {
+		VehicleService vehicleService = new VehicleService();
+		
+		List<Vehicle> vehicles = vehicleService.getAllVehicles();
+		List<Vehicle> marca = vehicleService.getVehiclesByMake("mauricio");
+		
+		for (Vehicle vei : vehicles) {
+			System.out.println(vei.toString());
+		}
+		
+		System.out.println("-*-----------------------------");
+		for (Vehicle vei : marca) {
+			System.out.println(vei.toString());
+		}
+		
+		vehicleService.deleteVehicle(13);
+		
+		vehicleService.updateVehicle(12, "djones", "Mauricio", 2004);
+		
+		Vehicle v1 = vehicleService.getVehiclesById(9);
+		Vehicle v2 = vehicleService.getVehiclesById(10);
+		
+		System.out.println(v1.toString());
+		System.out.println(v2.toString());
+	}
+	
+	
+
+}

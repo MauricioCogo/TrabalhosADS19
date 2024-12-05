@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <!-- Cor principal do aplicativo -->
+    <color name="colorPrimary">#6200EE</color>
+
+    <!-- Cor de destaque -->
+    <color name="colorAccent">#4682B4</color>
+
+    <!-- Outras cores que você pode usar -->
+    <color name="colorBackground">#F2F2F2</color>
+    <color name="colorText">#333333</color>
+    <color name="vermelho">#FF0000</color> <!-- Vermelho -->
+    <color name="amarelo">#FFEB3B</color> <!-- Amarelo -->
+    <color name="verde">#4CAF50</color> <!-- Verde -->
+    <color name="preto">#000000</color> <!-- Preto (cor padrão) -->
+    <color name="purple_200">#BB86FC</color>
+    <color name="purple_700">#6200EE</color>
+    <color name="teal_200">#03DAC5</color>
+</resources>

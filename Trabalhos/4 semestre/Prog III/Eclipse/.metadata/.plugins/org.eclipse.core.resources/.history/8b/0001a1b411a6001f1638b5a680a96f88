@@ -1,0 +1,37 @@
+package service;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
+
+import entity.Endereco;
+import repository.EnderecoRepository;
+
+public class EnderecoService {
+
+    private EnderecoService enderecoRepository;
+
+    public EnderecoService(Connection connection) {
+        this.enderecoRepository = new EnderecoService(connection);
+    }
+
+    // Método para listar todos os endereços
+    public List<Endereco> listarTodos() throws SQLException {
+        return enderecoRepository.();
+    }
+
+    // Método para buscar um endereço por ID
+    public Endereco buscarPorId(Long id) throws SQLException {
+        return enderecoRepository.buscarPorId(id);
+    }
+
+    // Método para salvar um novo endereço
+    public void salvar(Endereco endereco) throws SQLException {
+        enderecoRepository.salvar(endereco);
+    }
+
+    // Método para excluir um endereço
+    public void excluir(Long id) throws SQLException {
+        enderecoRepository.excluir(id);
+    }
+}

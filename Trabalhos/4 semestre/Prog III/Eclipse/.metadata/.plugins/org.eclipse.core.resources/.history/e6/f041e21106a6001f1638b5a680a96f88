@@ -1,0 +1,27 @@
+package service;
+
+import java.util.List;
+
+import entity.Vehicle;
+import repository.VehiclesRepository;
+
+public class VehicleService {
+
+	private final VehiclesRepository vehiclesRepository;
+	
+	public VehicleService() {
+	    this.vehiclesRepository = new VehiclesRepository();
+	}
+	
+	public boolean createVehicle(String marca, String modelo, int ano) {
+	    return vehiclesRepository.createVehicle(marca, modelo, ano);
+	}
+	
+    public List<Vehicle> getAllVehicles() {
+        return vehiclesRepository.getAllVehicles();
+    }
+
+    public List<Vehicle> getVehiclesByMake(String marca) {
+        return vehiclesRepository.getVehiclesByMake(marca);
+    }
+}

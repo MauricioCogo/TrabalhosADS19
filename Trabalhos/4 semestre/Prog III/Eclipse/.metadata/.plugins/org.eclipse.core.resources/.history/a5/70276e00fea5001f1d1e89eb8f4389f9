@@ -1,0 +1,11 @@
+package Main;
+
+import repository.*;
+public class Main {
+
+	public static void main(String[] args) {
+		VehiclesRepository VR = new VehiclesRepository();
+		System.out.println(VR.getCone()));
+	}
+
+}

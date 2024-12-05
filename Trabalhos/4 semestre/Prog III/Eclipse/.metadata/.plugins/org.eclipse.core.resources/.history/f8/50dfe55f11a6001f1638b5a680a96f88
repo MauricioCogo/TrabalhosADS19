@@ -1,0 +1,50 @@
+package service;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
+
+public class EnderecoService {
+
+    private AdressRepository enderecoRepository;
+
+    public EnderecoService(Connection connection) {
+        this.enderecoRepository = new EnderecoRepository(connection);
+    }
+
+    // Método para listar todos os endereços
+    public List<Endereco> listarTodos() {
+        try {
+            return enderecoRepository.listarTodos();
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao listar endereços", e);
+        }
+    }
+
+    // Método para buscar um endereço por ID
+    public Endereco buscarPorId(Long id) {
+        try {
+            return enderecoRepository.buscarPorId(id);
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao buscar endereço", e);
+        }
+    }
+
+    // Método para salvar um novo endereço
+    public void salvar(Endereco endereco) {
+        try {
+            enderecoRepository.salvar(endereco);
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao salvar endereço", e);
+        }
+    }
+
+    // Método para excluir um endereço
+    public void excluir(Long id) {
+        try {
+            enderecoRepository.excluir(id);
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao excluir endereço", e);
+        }
+    }
+}

@@ -17,6 +17,8 @@ public class Janela extends JFrame {
 				try {
 					frame = new Janela();
 					frame.setVisible(true);
+					frame.setResizable(false);
+					frame.setTitle("Jogo da velha maneiro!");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

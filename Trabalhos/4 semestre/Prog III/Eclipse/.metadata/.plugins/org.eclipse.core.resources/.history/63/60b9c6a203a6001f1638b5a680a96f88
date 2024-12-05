@@ -1,0 +1,44 @@
+package repository;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import Main.PostgresConnection;
+public class VehiclesRepository {
+	Connection cone;
+	
+	public String getCone() {
+		try {
+			cone = new PostgresConnection().getConnection();
+			return "Conectou";
+		} catch (Exception e) {
+			// TODO: handle exception
+			return e.getMessage();
+		}
+	}
+	
+	public boolean createVehicle(String marca, String modelo, int ano) {
+		String SQL = "INSERT INTO vehicles (marca, modelo, ano) VALUES (?, ?, ?)";
+        
+        try (Connection connection = PostgresConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SQL)) {
+
+            preparedStatement.setString(1, marca);
+            preparedStatement.setString(2, modelo);
+            preparedStatement.setInt(3, ano);
+            
+            int rowsAffected = preparedStatement.executeUpdate();
+            
+            System.out.println(rowsAffected);
+
+            return rowsAffected > 0;
+
+        } catch (SQLException e) {
+            System.err.println("Erro ao inserir veículo: " + e.getMessage());
+            return false;
+        }
+	}
+}

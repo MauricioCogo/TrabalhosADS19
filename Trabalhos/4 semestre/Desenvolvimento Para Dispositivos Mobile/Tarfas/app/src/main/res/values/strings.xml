@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Tarefas</string>
+    <string-array name="prioridades">
+        <item>Alta</item>
+        <item>Média</item>
+        <item>Baixa</item>
+    </string-array>
+</resources>

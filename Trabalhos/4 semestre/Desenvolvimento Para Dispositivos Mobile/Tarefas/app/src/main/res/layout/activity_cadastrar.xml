@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#F2F2F2"
+    android:gravity="center">
+
+    <!-- Título do aplicativo -->
+    <TextView
+        android:id="@+id/titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cadastro"
+        android:textSize="24sp"
+        android:textColor="#333333"
+        android:layout_marginBottom="40dp"/>
+
+    <!-- Campo para o nome -->
+    <EditText
+        android:id="@+id/none"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nome Completo"
+        android:inputType="textPersonName"
+        android:padding="10dp"
+        android:background="@drawable/edittext_background"
+        android:textColor="#333333"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Campo para o e-mail -->
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="E-mail"
+        android:inputType="textEmailAddress"
+        android:padding="10dp"
+        android:background="@drawable/edittext_background"
+        android:textColor="#333333"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Campo para a senha -->
+    <EditText
+        android:id="@+id/senha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Senha"
+        android:inputType="textPassword"
+        android:padding="10dp"
+        android:background="@drawable/edittext_background"
+        android:textColor="#333333"
+        android:layout_marginBottom="24dp"/>
+
+    <!-- Botão de cadastrar -->
+    <Button
+        android:id="@+id/cadastrar_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cadastrar"
+        android:textColor="#FFFFFF"
+        android:background="@color/colorPrimary"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Link para a tela de login -->
+    <TextView
+        android:id="@+id/login_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Já tem conta? Faça login"
+        android:textColor="@color/colorAccent"
+        android:clickable="true"
+        android:layout_marginTop="16dp"/>
+
+</LinearLayout>

@@ -1,0 +1,126 @@
+package repository;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import Main.PostgresConnection;
+import entity.Vehicle;
+public class VehiclesRepository {
+	Connection cone;
+	Vehicle vehicle;
+
+	public String getCone() {
+		try {
+			new PostgresConnection();
+			cone = PostgresConnection.getConnection();
+			return "Conectou";
+		} catch (Exception e) {
+			// TODO: handle exception
+			return e.getMessage();
+		}
+	}
+	
+	public Vehicle getVehiclesByMake(String marca) {
+	    String SQL = "SELECT id, marca, modelo, ano FROM vehicles WHERE marca = ?";
+	    Vehicle vehicle = null;
+
+	    try (Connection connection = PostgresConnection.getConnection();
+	         PreparedStatement preparedStatement = connection.prepareStatement(SQL)) {
+
+	        preparedStatement.setString(1, marca);
+	        
+	        try (ResultSet resultSet = preparedStatement.executeQuery()) {
+	            if (resultSet.next()) {
+	                int id = resultSet.getInt("id");
+	                String modelo = resultSet.getString("modelo");
+	                int ano = resultSet.getInt("ano");
+
+	                vehicle = new Vehicle(id, marca, modelo, ano);
+	            }
+	        }
+
+	    } catch (SQLException e) {
+	        System.err.println("Erro ao buscar veículo: " + e.getMessage());
+	    }
+	    return vehicle;
+	}
+
+	public Vehicle getVehiclesByModel(String modelo) {
+	    String SQL = "SELECT id, marca, modelo, ano FROM vehicles WHERE modelo = ?";
+	    Vehicle vehicle = null;
+
+	    try (Connection connection = PostgresConnection.getConnection();
+	         PreparedStatement preparedStatement = connection.prepareStatement(SQL)) {
+
+	        preparedStatement.setString(1, modelo);
+	        
+	        try (ResultSet resultSet = preparedStatement.executeQuery()) {
+	            if (resultSet.next()) {
+	                int id = resultSet.getInt("id");
+	                String marca = resultSet.getString("marca");
+	                int ano = resultSet.getInt("ano");
+
+	                vehicle = new Vehicle(id, marca, modelo, ano);
+	            }
+	        }
+
+	    } catch (SQLException e) {
+	        System.err.println("Erro ao buscar veículo: " + e.getMessage());
+	    }
+	    return vehicle;
+	}
+
+	public Vehicle getVehiclesByYear(int ano) {
+	    String SQL = "SELECT id, marca, modelo, ano FROM vehicles WHERE ano = ?";
+	    Vehicle vehicle = null;
+
+	    try (Connection connection = PostgresConnection.getConnection();
+	         PreparedStatement preparedStatement = connection.prepareStatement(SQL)) {
+
+	        preparedStatement.setInt(1, ano);
+	        
+	        try (ResultSet resultSet = preparedStatement.executeQuery()) {
+	            if (resultSet.next()) {
+	                int id = resultSet.getInt("id");
+	                String marca = resultSet.getString("marca");
+	                String modelo = resultSet.getString("modelo");
+
+	                vehicle = new Vehicle(id, marca, modelo, ano);
+	            }
+	        }
+
+	    } catch (SQLException e) {
+	        System.err.println("Erro ao buscar veículo: " + e.getMessage());
+	    }
+	    return vehicle;
+	}
+
+	public Vehicle getVehiclesById(int id) {
+	    String SQL = "SELECT id, marca, modelo, ano FROM vehicles WHERE id = ?";
+	    Vehicle vehicle = null;
+
+	    try (Connection connection = PostgresConnection.getConnection();
+	         PreparedStatement preparedStatement = connection.prepareStatement(SQL)) {
+
+	        preparedStatement.setInt(1, id);
+	        
+	        try (ResultSet resultSet = preparedStatement.executeQuery()) {
+	            if (resultSet.next()) {
+	                String marca = resultSet.getString("marca");
+	                String modelo = resultSet.getString("modelo");
+	                int ano = resultSet.getInt("ano");
+
+	                vehicle = new Vehicle(id, marca, modelo, ano);
+	            }
+	        }
+
+	    } catch (SQLException e) {
+	        System.err.println("Erro ao buscar veículo: " + e.getMessage());
+	    }
+	    return vehicle;
+	}
+}

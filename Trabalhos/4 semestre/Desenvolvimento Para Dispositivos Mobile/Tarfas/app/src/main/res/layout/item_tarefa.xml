@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#f7f7f7"
+    android:elevation="2dp"
+    android:layout_marginBottom="8dp">
+
+    <!-- Tarefa Principal -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="8dp"
+        android:gravity="center_vertical"
+        android:background="@drawable/bg_task_header">
+
+        <TextView
+            android:id="@+id/titulo_tarefa"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Título da tarefa"
+            android:textSize="18sp"
+            android:textColor="#212121"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:fontFamily="sans-serif-medium" />
+
+        <!-- CheckBox para marcar se a tarefa principal foi concluída -->
+        <CheckBox
+            android:id="@+id/status_tarefa_principal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Concluída"
+            android:textSize="14sp"
+            android:textColor="#000"
+            android:buttonTint="#4a4a4a"
+            android:layout_marginEnd="12dp" />
+    </LinearLayout>
+
+    <!-- Descrição da tarefa -->
+    <TextView
+        android:id="@+id/descricao_tarefa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Descrição da tarefa"
+        android:textSize="16sp"
+        android:textColor="#757575"
+        android:layout_marginTop="4dp"
+        android:maxLines="3"
+        android:padding="5dp"
+        android:ellipsize="end" />
+
+    <!-- Data de Vencimento -->
+    <TextView
+        android:id="@+id/data_vencimento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Data de Vencimento"
+        android:textSize="14sp"
+        android:padding="5dp"
+        android:textColor="#9E9E9E"
+        android:layout_marginTop="4dp" />
+
+    <!-- Prioridade -->
+    <TextView
+        android:id="@+id/prioridade_tarefa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Prioridade"
+        android:textSize="14sp"
+        android:padding="5dp"
+        android:textColor="#9E9E9E"
+        android:layout_marginTop="4dp" />
+
+    <!-- Botões para tarefa principal -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        android:gravity="end">
+
+        <Button
+            android:id="@+id/btn_editar_tarefa"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/lapis"
+            android:layout_marginEnd="8dp" />
+
+        <Button
+            android:id="@+id/btn_excluir_tarefa"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/lata"
+            android:layout_marginEnd="8dp" />
+    </LinearLayout>
+
+    <!-- Botão para expandir as subtarefas -->
+    <Button
+        android:id="@+id/btn_exibir_subtarefas"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="end"
+        android:background="@drawable/btn_arrow"
+        android:contentDescription="Expandir subtarefas"
+        android:layout_marginTop="8dp" />
+
+    <!-- Container para as subtarefas (inicialmente invisível) -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_subtarefas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginTop="8dp" />
+
+</LinearLayout>

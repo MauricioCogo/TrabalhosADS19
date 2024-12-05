@@ -53,6 +53,7 @@ public class TelaInicial extends JPanel {
 				} else {
 					field_name2.setEditable(true);
 					field_name2.setEnabled(true);
+					field_name2.setText("");
 
 				}
 			}
@@ -70,9 +71,11 @@ public class TelaInicial extends JPanel {
 
 					Player p1 = new Player();
 					p1.setName(field_name.getText());
+					p1.setSymbol("X");
 					Player p2 = new Player();
 					p2.setName(field_name2.getText());
 					p2.setIA(chk_computador.isSelected());
+					p2.setSymbol("O");
 					System.out.println(p1.toString());
 					System.out.println(p2.toString());
 					
@@ -88,11 +91,15 @@ public class TelaInicial extends JPanel {
 
 		if (field_name.getText().isBlank()) {
 			JOptionPane.showMessageDialog(btn_comecar.getParent(), "Nome do player 1 vazio!");
-			return false; // Interrompe a execução do método
+			return false; // Interrompe a execuï¿½ï¿½o do mï¿½todo
 		}
 		if (field_name2.getText().isBlank()) {
 			JOptionPane.showMessageDialog(btn_comecar.getParent(), "Nome do player 2 vazio!");
-			return false; // Interrompe a execução do método
+			return false; // Interrompe a execuï¿½ï¿½o do mï¿½todo
+		}
+		if(field_name.getText().equals(field_name2.getText())) {
+			JOptionPane.showMessageDialog(btn_comecar.getParent(), "Os nomes nÃ£o podem ser iguais!");
+			return false; // Interrompe a execuï¿½ï¿½o do mï¿½todo
 		}
 		return true;
 
